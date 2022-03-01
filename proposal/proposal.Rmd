@@ -25,12 +25,8 @@ Correlation between medals and income?
 
 ## 2. Data
 
-```{r load-data, message = FALSE }
-library(readxl)
-View(Medals)
-view(Entries_By_Discipline)
-view(Athletes)
-view(Teams)
+```{r load-data}
+
 ```
 
 
