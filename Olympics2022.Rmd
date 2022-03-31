@@ -20,3 +20,12 @@ glimpse(Olympics2022data)
 Data Analysis Plan:
 
 Our research question that we decided on was looking at medal counts vs the economic status of the country the athlete is representing. We want to see if there is a correlation between First World countries and a higher number of medals vs a Third World country. Our outcome variable(Y) is the correlation value and our predictor variable(X) is the medal counts. The countries that we will include as First World will be USA, Australia, Canada, New Zealand and Japan. For our Third World countries, we will include Haiti, South Sudan, Afghanistan, Madagascar, and Sierra Leone. We will start with 5 countries in each category and will add more if we think that data analysis calls for it. 
+```{r}
+install.packages("raster")
+
+```
+```{r}
+#glimpse(Medals12)
+
+```
+
