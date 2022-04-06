@@ -46,8 +46,16 @@ style_xaringan(
 )
 ```
 
+class: title-slide center middle
+background-image: url(img/olympics1.png)
+background-size: cover
 
-class: center, middle
+# Olympics: True Athletic Skill or is something else at play
+## Amy Townend, Dylan Williams, Sam Simmons 
+## Bates College
+### 14 April, 2022
+
+---
 
 ## A statement of the overall goal / research question
 
