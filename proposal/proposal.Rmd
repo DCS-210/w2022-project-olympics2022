@@ -26,6 +26,12 @@ Correlation between medals and income?
 ## 2. Data
 
 ```{r load-data}
+View(Athletes)
+View(CountryTemp)
+View(Entries_By_Discipline)
+View(Medals12)
+View(Teams)
+View(gapminder)
 
 ```
 
