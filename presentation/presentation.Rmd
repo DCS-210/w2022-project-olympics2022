@@ -1,6 +1,6 @@
 ---
 title: "Olympics 2022"
-subtitle: "medal count vs the economic status of the country each athlete is representing"
+subtitle: "Medal Count vs The Economic Status of Each Country"
 author: "Amy, Sam, and Dylan"
 institute: "Bates College"
 date: "`r Sys.Date()`"
