@@ -5,6 +5,11 @@ output:
   github_document:
     df_print: paged
 ---
+```{r}
+library(ggplot2)
+library(xaringan)
+```
+
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
@@ -37,7 +42,12 @@ install.packages("raster")
 
 ```
 ```{r}
-#glimpse(Medals12)
-
+glimpse(Medals12)
+glimpse(CountryTemp)
+```
+```{r}
+ggplot2(, aes(x = pieces, y = us_price, xlim=(1000), color="orange")) + ggtitle("Are Lego Sets worth the cost?") +
+  xlab("# of Lego Pieces") + ylab("US Price($)") +
+  geom_point()
 ```
 
