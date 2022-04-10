@@ -158,7 +158,7 @@ ggplot(all_olympics, aes(x = Population, y = Num_Athletes, xlim=(1000), color="r
   theme_minimal()
 
 ```
----
+
 
 #Dylan graph
 ```{r}
