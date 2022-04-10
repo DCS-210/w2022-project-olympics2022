@@ -1,7 +1,16 @@
 ---
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+title: "Olympics: Skill or Other Variables"
+subtitle: "How does economics status, population, location, etc affect medal counts"
+>>>>>>> 19bbf59213857a81e23adbfcca2565cec2c947f7
+author: "Amy, Sam, and Dylan"
+=======
 title: "Olympics: Cash, Climate, and Champions"
 subtitle: "Effect of GDP and Temperature on Medal Count"
 name: "Amy Townend, Sam Simmons, Dylan Williams"
+>>>>>>> 8ab7fea14d956ec63839e828ecf7ba9a48c0964a
 institute: "Bates College"
 date: "`r Sys.Date()`"
 output:
