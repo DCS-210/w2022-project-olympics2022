@@ -7,6 +7,8 @@ The 2022 Winter Olympics which was hosted in Beijing included the participation 
 
 For our project, we decided to investigate the effect of climate and economic status on medal count at the Winter 2022 Olympics. We got our data from Kaggle in which someone created a data set which was updated daily with the new medal count. In order to get climate data on the countries we chose, we were able to access another database on Kaggle which gave us the average temperatures. Finally, in order to judge how an economic status would affect a country’s ability to have good athlete participation, we downloaded a data set from the World Bank. In order to get a good feel on the number of athletes qualified vs total population, we also collected total populations from 2020 since that is the most present data we could get. In order to run our visualizations and regressions, we were able to merge these data sets in a summary data frame. This is a very preliminary study into correlations between these variables and an extensive analysis would needed to be done with much more data and variables to avoid omitted variable bias. 
 
+For another data visualization, we graphed population versus number of athletes per country. These variables are important to analyze because there are several takeaways from comparing population and number of athletes per country. The reason most of the data on the graph is close to the y-axis is because there is a large outlier on the right side that causes a distinctive distribution of athletes per country. China has quite a large population, deviating from the average population, at 1439323776 people. Another notable takeaway from the graph is that Norway has the greatest number of olympic medals, 37. 
+
 
 
 ## Presentation
