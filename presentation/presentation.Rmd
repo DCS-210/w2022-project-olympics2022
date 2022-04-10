@@ -1,24 +1,35 @@
 ---
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 title: "Olympics: Skill or Other Variables"
 subtitle: "How does economics status, population, location, etc affect medal counts"
 >>>>>>> 19bbf59213857a81e23adbfcca2565cec2c947f7
 author: "Amy, Sam, and Dylan"
+=======
+title: "Olympics: Cash, Climate, and Champions"
+subtitle: "Effect of GDP and Temperature on Medal Count"
+name: "Amy Townend, Sam Simmons, Dylan Williams"
+>>>>>>> 8ab7fea14d956ec63839e828ecf7ba9a48c0964a
 institute: "Bates College"
 date: "`r Sys.Date()`"
 output:
   xaringan::moon_reader:
-    css: xaringan-themer.css
+    css: xaringan-themer2.css
     lib_dir: libs
     nature:
       ratio: "16:9"
       highlightStyle: github
       highlightLines: true
       countIncrementalSlides: false
-params:
-  background_img: "img/olympics1.png"
+
 ---
+
+```{r include=FALSE}
+library(readr)
+all_olympics <- read_csv("/cloud/project/data/all_olympics.csv")
+View(all_olympics)
+```
 
 ```{r load-packages, include = FALSE}
 # Add any additional packages you need to this chunk
@@ -27,6 +38,8 @@ library(tidymodels)
 library(palmerpenguins)
 library(knitr)
 library(xaringanthemer)
+install.packages("leaflet")
+
 ```
 
 ```{r setup, include=FALSE}
@@ -34,147 +47,122 @@ library(xaringanthemer)
 knitr::opts_chunk$set(fig.retina = 3, dpi = 300, fig.width = 6, fig.asp = 0.618, out.width = "80%")
 ```
 
-```{r load-data, include=FALSE}
-# Load your data here
-View(Athletes)
-View(CountryTemp)
-View(Entries_By_Discipline)
-View(Medals12)
-View(Teams)
-View(gapminder)
+```{r include= FALSE}
+#define new column to add
+medals_type2 <- c(Gold, Silver, Bronze)
 
+#add column called 'new'
+all_olympics$medals_type1 <- new
+
+#view new data frame
+all_olympics
 ```
 
-```{r}
-style_xaringan(
-  title_slide_background_image = "img/confetti.jpg"
-)
+class: inverse, center
+## Consequences of Economic and Temperature differences
+.pull-left[
+
+* In the 2022 Olympics, there were 91 countries and 109 gold medals awarded.
+
+* No athlete from a tropical country has ever won a metal in the Winter Olympics(crazy right?)
+
+* Don't believe us? https://olympics.com/en/news/which-tropical-nation-will-win-an-olympic-winter-games-medal 
+* Olympians earn sponsorship from their athletic achievements
+* Hypothesis: Olympians who live in a warmer climate or receive less funding are less likely to get attention or achieve good results
+* Goal 1: Investigate for a correlation between both average temperature and medal count 
+*Goal 2: Investigate for a correlation between GDP and medal count
+]
+
+.pull-right[
+```{r cool-runnings, echo = FALSE, out.height = 400, out.width = 600, fig.align = 'right', fig.alt = "Cool Runnings Movie Poster"}
+knitr::include_graphics("img/coolrunnings.jpg")
 ```
+.footnote[
+####Cool Runnings Movie(1993)
+]
 
-class: title-slide center middle
-background-image: url(img/olympics1.png)
-background-size: cover
+]
 
----
 
-## A statement of the overall goal / research question
-
----
-
-class: inverse, center, middle
-
-# Section title
 
 ---
 
-# Hello World
+class: inverse, center
 
-- Click the `Knit` button to compile your presentation
-
-- Make sure to commit and push all resulting files to your GitHub repo
-
----
-
-class: inverse, middle, center
-
-# Using xaringan
-
----
-
-# xaringan
-
-- The presentation is created using the `xaringan` package
-
-- Use `---` to separate slides and `--` for incremental builds
-
---
-
-- Like this
-
----
-
-# Layouts
-
-You can use plain text
-
-- or bullet points
+## Data Information
 
 .pull-left[
-or text in two columns $^*$
+* Pulled from Kaggle databases, was updated with medal count every other day as Olympics went on
+* Used WorldBank to get most accurate and recent GDP information
+* Summarized climate data by averaging temperature from past 4 years
+* Population was from most recent census data(2020)
+
 ]
+
 .pull-right[
-- like
-- this
+```{r dataset-image3, echo = FALSE, out.height = 350, out.width = 600, fig.align = 'right'}
+knitr::include_graphics("img/medalspic.jpg")
+```
 ]
 
 .footnote[
-[*] And add footnotes
+###### Image: Olympic Medals
 ]
-
 ---
 
-# Code
-
-```{r boring-regression}
-# a boring regression
-model <- lm(dist ~ speed, data = cars)
-tidy(model)
-glance(model)
-```
-
----
-
-# Plots
-
-```{r recode-species, echo = FALSE}
-# In this chunk I'm doing a bunch of analysis that I don't want to present 
-# in my slides. But I need the resulting data frame for a plot I want to present.
-iris_modified <- iris %>%
-  mutate(Species = fct_other(Species, keep = "setosa"))
-```
-
-```{r plot-iris, echo = FALSE}
-# Code hidden with echo = FALSE
-# Uses modified iris dataset from previous chunk
-# Play around with height and width until you're happy with the look
-ggplot(data = iris_modified, mapping = aes(x = Sepal.Width, y = Sepal.Length, color = Species)) +
-  geom_point() + 
-  theme_minimal() # theme options: https://ggplot2.tidyverse.org/reference/ggtheme.html
-```
-
----
-
-## Plot and text
-
-.pull-left[
-- Some text
-- goes here
-]
-.pull-right[
-```{r warning=FALSE, out.width="100%", fig.width=4, echo=FALSE}
-# see how I changed out.width and fig.width from defaults
-# to make the figure bigger
-ggplot(penguins, aes(x = bill_length_mm, y = species, color = species)) +
-  geom_boxplot() +
-  theme_minimal()
+##Gold Medals Per Country 
+.pull-center[
+```{r medals_p, echo = FALSE, warning = FALSE, out.width="70%", fig.align = 'center', echo=FALSE}
+all_olympics %>%
+  ggplot(aes(x=fct_reorder(NOC, Gold), y= Total, fill = )) +
+  geom_bar(position = "stack", stat="identity", color = "gold", width=0.005) +
+  theme_minimal() +
+  coord_flip()
 ```
 ]
+---
+## GDP vs Total Medals
+.pull-center[
+```{r gdp-vs-gold-medals , echo = FALSE, warning = FALSE, out.width="70%", fig.align = 'center', echo=FALSE}
+ggplot(all_olympics, aes(x = Avg_GDP, y = Total, xlim=(1000), color="orange"))  + xlab("GDP (Millions)") + ylab("Total Number of Medals") +
+  geom_point()
 
+```
+]
 ---
 
-# Tables
+## Regression
 
-If you want to generate a table, make sure it is in the HTML format (instead of Markdown or other formats), e.g.,
+.pull-center[
+* Our regression function of how the average GDP of a country will affect its gold medal chances are as follows,
+* $\hat{AverageGDP_i} = 859910.7+ 353262.9	* GoldMedals_i$
+* Our R^2 value was 0.09337504
+]
 
-```{r iris-table, echo = FALSE}
-kable(head(iris), format = "html")
+```{r GDP-VS-GOLD , echo = FALSE, warning = FALSE, out.width="70%", fig.align = 'center', echo=FALSE}
+gdp_gold <- linear_reg() %>%
+  set_engine("lm") %>%
+  fit(Avg_GDP ~ Gold, data = all_olympics)
+gdp_gold %>%
+  tidy()
+glance(gdp_gold)$r.squared
+
 ```
 
 ---
+
+
+
+```{r image-2, echo=FALSE}
+style_xaringan(
+  title_slide_background_image = "img/olympics1.jpg"
+)
+```
+---
+
 
 # Images
 
-```{r castle, echo = FALSE, out.width = "60%", fig.align = "center", fig.cap = "Image credit: Photo by Jörg Angeli on Unsplash."}
 include_graphics("https://images.unsplash.com/photo-1535448033526-c0e85c9e6968?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80")
 ```
 
@@ -186,33 +174,5 @@ background-image: url(https://images.unsplash.com/photo-1535448033526-c0e85c9e69
 
 ---
 
-# Math Expressions
 
-You can write LaTeX math expressions inside a pair of dollar signs, e.g. &#36;\alpha+\beta$ renders $\alpha+\beta$. You can use the display style with double dollar signs:
 
-```
-$$\bar{X}=\frac{1}{n}\sum_{i=1}^nX_i$$
-```
-
-$$\bar{X}=\frac{1}{n}\sum_{i=1}^nX_i$$
-
-Limitations:
-
-1. The source code of a LaTeX math expression must be in one line, unless it is inside a pair of double dollar signs, in which case the starting `$$` must appear in the very beginning of a line, followed immediately by a non-space character, and the ending `$$` must be at the end of a line, led by a non-space character;
-
-1. There should not be spaces after the opening `$` or before the closing `$`.
-
-1. Math does not work on the title slide (see [#61](https://github.com/yihui/xaringan/issues/61) for a workaround).
-
----
-
-# Feeling adventurous?
-
-- Want to find out more about `xaringan`? See https://slides.yihui.name/xaringan/#1.
-
-- You are welcomed to use the default styling of the slides. In fact, that's what I expect majority of you will do. You will differentiate yourself with the content of your presentation.
-
-- But some of you might want to play around with slide styling. The 
-`xaringanthemer` provides some solutions for this that: https://pkg.garrickadenbuie.com/xaringanthemer.
-
-- And if you want more bells and whistles, there is also `xaringanExtra`: https://pkg.garrickadenbuie.com/xaringanExtra.
