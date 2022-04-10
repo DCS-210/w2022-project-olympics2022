@@ -19,7 +19,7 @@ output:
 ```{r include=FALSE}
 library(readr)
 all_olympics <- read_csv("/cloud/project/data/all_olympics.csv")
-View(all_olympics)
+#View(all_olympics)
 ```
 
 ```{r load-packages, include = FALSE}
@@ -40,13 +40,13 @@ knitr::opts_chunk$set(fig.retina = 3, dpi = 300, fig.width = 6, fig.asp = 0.618,
 
 ```{r include= FALSE}
 #define new column to add
-medals_type2 <- c(Gold, Silver, Bronze)
+#medals_type2 <- c(Gold, Silver, Bronze)
 
 #add column called 'new'
-all_olympics$medals_type1 <- new
+#all_olympics$medals_type1 <- new
 
 #view new data frame
-all_olympics
+#all_olympics
 ```
 
 class: inverse, center
@@ -140,6 +140,16 @@ glance(gdp_gold)$r.squared
 
 ```
 
+---
+
+##Sams graph
+```{r}
+```
+---
+
+#Dylan graph
+```{r}
+```
 ---
 
 
