@@ -15,7 +15,7 @@ We wanted to explore the relationship between a country's GDP and the number of 
 
 For another data visualization, we graphed population versus number of athletes per country. These variables are important to analyze because there are several takeaways from comparing population and number of athletes per country. The reason most of the data on the graph is close to the y-axis is because there is a large outlier on the right side that causes a distinctive distribution of athletes per country. China has quite a large population, deviating from the average population, at 1439323776 people. Another notable takeaway from the graph is that Norway has the greatest number of olympic medals, 37. 
 
-
+Having only a few countries represented in our data set allows us to take a deeper dive into the analysis of medal counts. One of our visualizations involves 3 variables. The three variables: total number of medals won, country, and number of athletes are represented in this visualization. The country of origin is represented on the x-axis and the number of athletes is represented on the y-axis. Since the total number of medals won is a numeric value, ggplot created a legend with a continuous color scale to represent the amount of medals won. A higher count of medals(closer to 30) is represented with a light shade of blue whereas a lower number of medals won is represented as a darker navy blue.  A takeaway from this data visualization is that the greater the number of athletes representing a country, the more total medals that country has won. 
 
 ## Presentation
 
