@@ -19,11 +19,11 @@ Our presentation can be found [here](presentation/presentation.html).
 
 ## Data
 
-Sarkhel, Arjun Prasad 2022, "2022 Winter Olympics Beijing", Kaggle , viewed 19 February 2022, https://www.kaggle.com/datasets/arjunprasadsarkhel/2022-winter-olympics-beijing.
-World Bank. "GDP (constant 2015 US$)" World Development Indicators, The World Bank Group, 2015,https://data.worldbank.org/indicator/NY.GDP.MKTP.KD.
-Worldometer. "Countries in the world by population (2022)", https://www.worldometers.info/world-population/population-by-country/
-Freedom House. "Global Freedom Scores" Freedom House, 2020, https://freedomhouse.org/countries/freedom-world/scores
-Chavan, Akshay 2020, "Average Temperature per country per year", Kaggle, viewed 22 February 2022, https://www.kaggle.com/code/akshaychavan/average-temperature-per-country-per-year/data
+* Sarkhel, Arjun Prasad 2022, "2022 Winter Olympics Beijing", Kaggle , viewed 19 February 2022, https://www.kaggle.com/datasets/arjunprasadsarkhel/2022-winter-olympics-beijing.
+* World Bank. "GDP (constant 2015 US$)" World Development Indicators, The World Bank Group, 2015,https://data.worldbank.org/indicator/NY.GDP.MKTP.KD.
+* Worldometer. "Countries in the world by population (2022)", https://www.worldometers.info/world-population/population-by-country/
+* Freedom House. "Global Freedom Scores" Freedom House, 2020, https://freedomhouse.org/countries/freedom-world/scores
+* Chavan, Akshay 2020, "Average Temperature per country per year", Kaggle, viewed 22 February 2022, https://www.kaggle.com/code/akshaychavan/average-temperature-per-country-per-year/data
 ## References
 
 Background Image: https://olympics.com/ioc/olympic-rings
