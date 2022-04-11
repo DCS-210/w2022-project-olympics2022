@@ -142,7 +142,8 @@ glance(gdp_gold)$r.squared
 ```
 
 ---
-###World map 
+
+##World Map
 
 ```{r world-map, echo=FALSE}
 m <- leaflet() %>%
@@ -158,7 +159,39 @@ m <- leaflet() %>%
   addCircleMarkers(lng = 46, lat = 15, color = 'green' )
   
 m  # Print the map
+
 ```
+
+##Sams graph
+```{r athletesVSpopulation}
+ggplot(all_olympics, aes(x = Population, y = Num_Athletes, xlim=(1000), color="red"))  + xlab("Population") + ylab("Number of Athletes") +
+  geom_point(shape = 16, size = 5) +
+  theme_minimal()
+```
+
+```{r sam2nd}
+ggplot(all_olympics, aes(x = Num_Athletes, y = NOC, color = Total)) +
+  xlab("Number of Athletes") + ylab("Country") +
+  geom_point()
+  theme_minimal()
+
+```
+
+
+
+#Dylan graph
+```{r}
+```
+---
+
+
+
+```{r image-2, echo=FALSE}
+style_xaringan(
+  title_slide_background_image = "img/olympics1.jpg"
+)
+```
+---
 
 
 ---
