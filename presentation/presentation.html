@@ -1,35 +1,27 @@
 <!DOCTYPE html>
 <html lang="" xml:lang="">
   <head>
-<<<<<<< HEAD
-    <title>Olympics 2022</title>
-    <meta charset="utf-8" />
-    <meta name="author" content="Amy, Sam, and Dylan" />
-    <meta name="date" content="2022-03-29" />
-=======
     <title>Olympics: Cash, Climate, and Champions</title>
     <meta charset="utf-8" />
-<<<<<<< HEAD
     <meta name="date" content="2022-04-11" />
-=======
-    <meta name="date" content="2022-04-10" />
->>>>>>> 8ab7fea14d956ec63839e828ecf7ba9a48c0964a
->>>>>>> b5b600dee2d30ce910291480f9cee381d39461f3
     <script src="libs/header-attrs-2.11/header-attrs.js"></script>
+    <script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
+    <script src="libs/jquery-1.12.4/jquery.min.js"></script>
+    <link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
+    <script src="libs/leaflet-1.3.1/leaflet.js"></script>
+    <link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
+    <script src="libs/proj4-2.6.2/proj4.min.js"></script>
+    <script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
+    <link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
+    <script src="libs/leaflet-binding-2.1.1/leaflet.js"></script>
     <link rel="stylesheet" href="xaringan-themer2.css" type="text/css" />
   </head>
   <body>
     <textarea id="source">
 class: center, middle, inverse, title-slide
 
-<<<<<<< HEAD
-# Olympics 2022
-## Medal Count vs The Economic Status of Each Country
-### Amy, Sam, and Dylan
-=======
 # Olympics: Cash, Climate, and Champions
 ## Effect of GDP and Temperature on Medal Count
->>>>>>> 8ab7fea14d956ec63839e828ecf7ba9a48c0964a
 ### Bates College
 ### 2022-04-11
 
@@ -44,10 +36,7 @@ class: center, middle, inverse, title-slide
 
 
 
-<<<<<<< HEAD
 
-=======
->>>>>>> b5b600dee2d30ce910291480f9cee381d39461f3
 class: inverse, center
 ## Consequences of Economic and Temperature differences
 .pull-left[
@@ -58,9 +47,6 @@ class: inverse, center
 
 * Don't believe us? https://olympics.com/en/news/which-tropical-nation-will-win-an-olympic-winter-games-medal 
 * Olympians earn sponsorship from their athletic achievements
-* Hypothesis: Olympians who live in a warmer climate or receive less funding are less likely to get attention or achieve good results
-* Goal 1: Investigate for a correlation between both average temperature and medal count 
-*Goal 2: Investigate for a correlation between GDP and medal count
 ]
 
 .pull-right[
@@ -98,14 +84,17 @@ class: inverse, center
 
 ##Gold Medals Per Country 
 
-
-
 .pull-center[
 &lt;img src="presentation_files/figure-html/medals_p-1.png" width="70%" style="display: block; margin: auto;" /&gt;
 ]
 ---
-## GDP vs Total Medals
+## Average Temperature vs Total Medals
 .pull-center[
+
+```
+## `geom_smooth()` using formula 'y ~ x'
+```
+
 &lt;img src="presentation_files/figure-html/gdp-vs-gold-medals -1.png" width="70%" style="display: block; margin: auto;" /&gt;
 ]
 ---
@@ -132,35 +121,27 @@ class: inverse, center
 ```
 
 ---
+###World map 
 
-##Sams graph
-
----
-
-#Dylan graph
-
----
-
-
+<div id="htmlwidget-c48b1cf4b8b464cbbb1e" style="width:80%;height:1112.4px;" class="leaflet html-widget"></div>
+<script type="application/json" data-for="htmlwidget-c48b1cf4b8b464cbbb1e">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"https://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]},{"method":"addCircleMarkers","args":[15,62,10,null,null,{"interactive":true,"className":"","stroke":true,"color":"red","weight":5,"opacity":0.5,"fill":true,"fillColor":"red","fillOpacity":0.2},null,null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addCircleMarkers","args":[5.75,52.5,10,null,null,{"interactive":true,"className":"","stroke":true,"color":"blue","weight":5,"opacity":0.5,"fill":true,"fillColor":"blue","fillOpacity":0.2},null,null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addCircleMarkers","args":[105,35,10,null,null,{"interactive":true,"className":"","stroke":true,"color":"purple","weight":5,"opacity":0.5,"fill":true,"fillColor":"purple","fillOpacity":0.2},null,null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addCircleMarkers","args":[9,51,10,null,null,{"interactive":true,"className":"","stroke":true,"color":"yellow","weight":5,"opacity":0.5,"fill":true,"fillColor":"yellow","fillOpacity":0.2},null,null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addCircleMarkers","args":[10,62,10,null,null,{"interactive":true,"className":"","stroke":true,"color":"pink","weight":5,"opacity":0.5,"fill":true,"fillColor":"pink","fillOpacity":0.2},null,null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addCircleMarkers","args":[12.83,42.83,10,null,null,{"interactive":true,"className":"","stroke":true,"color":"black","weight":5,"opacity":0.5,"fill":true,"fillColor":"black","fillOpacity":0.2},null,null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addCircleMarkers","args":[100,60,10,null,null,{"interactive":true,"className":"","stroke":true,"color":"orange","weight":5,"opacity":0.5,"fill":true,"fillColor":"orange","fillOpacity":0.2},null,null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addCircleMarkers","args":[13.33,47.33,10,null,null,{"interactive":true,"className":"","stroke":true,"color":"white","weight":5,"opacity":0.5,"fill":true,"fillColor":"white","fillOpacity":0.2},null,null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addCircleMarkers","args":[15,46,10,null,null,{"interactive":true,"className":"","stroke":true,"color":"green","weight":5,"opacity":0.5,"fill":true,"fillColor":"green","fillOpacity":0.2},null,null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[5.75,105],"lng":[35,62]}},"evals":[],"jsHooks":[]}</script>
 
 
 ---
+###Goals
+.pull-center[
+* Hypothesis: Olympians who live in a warmer climate or receive less funding are less likely to get attention or achieve good results
+* Goal 1: Investigate for a correlation between both average temperature and medal count 
+* Goal 2: Investigate for a correlation between GDP and medal count
+]
 
+---
+##World map 2 
 
-# Images
-
-include_graphics("https://images.unsplash.com/photo-1535448033526-c0e85c9e6968?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=1650&amp;q=80")
-```
-
-Or you can also include a full page image. See next slide.
 
 ---
 
-background-image: url(https://images.unsplash.com/photo-1535448033526-c0e85c9e6968?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=1650&amp;q=80)
-
 ---
-
-
 
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>

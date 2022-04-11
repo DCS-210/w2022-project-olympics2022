@@ -19,7 +19,7 @@ output:
 ```{r include=FALSE}
 library(readr)
 all_olympics <- read_csv("/cloud/project/data/all_olympics.csv")
-View(all_olympics)
+#View(all_olympics)
 ```
 
 ```{r load-packages, include = FALSE}
@@ -29,7 +29,9 @@ library(tidymodels)
 library(palmerpenguins)
 library(knitr)
 library(xaringanthemer)
+library(leaflet)
 install.packages("leaflet")
+
 
 ```
 
@@ -51,9 +53,6 @@ class: inverse, center
 
 * Don't believe us? https://olympics.com/en/news/which-tropical-nation-will-win-an-olympic-winter-games-medal 
 * Olympians earn sponsorship from their athletic achievements
-* Hypothesis: Olympians who live in a warmer climate or receive less funding are less likely to get attention or achieve good results
-* Goal 1: Investigate for a correlation between both average temperature and medal count 
-*Goal 2: Investigate for a correlation between GDP and medal count
 ]
 
 .pull-right[
@@ -95,29 +94,31 @@ knitr::include_graphics("img/medalspic.jpg")
 
 ##Gold Medals Per Country 
 
-```{r group-by-medals, include = FALSE}
-condition <- rep(c("GOLD" , "SILVER" , "Bronze") , 4)
-  
-
-
-```
-
 .pull-center[
 ```{r medals_p, echo = FALSE, warning = FALSE, out.width="70%", fig.align = 'center', echo=FALSE}
-all_olympics %>%
-  ggplot(aes(x=fct_reorder(NOC, Gold), y= Total, fill = )) +
-  geom_bar(position = "stack", stat="identity", color = "gold", width=0.005) +
+
+all_olympics_long <- all_olympics %>%
+  pivot_longer(
+    cols = c("Gold", "Silver", "Bronze"),
+    names_to = "Medal",
+    values_to = "Num_Medals"
+  )
+
+
+all_olympics_long %>%
+  ggplot(aes(x= NOC , y= Num_Medals , fill = Medal)) +
+  geom_bar(position = "stack", stat="identity", width= 0.5 ) +
   theme_minimal() +
   coord_flip()
 ```
 ]
 ---
-## GDP vs Total Medals
+## Average Temperature vs Total Medals
 .pull-center[
 ```{r gdp-vs-gold-medals , echo = FALSE, warning = FALSE, out.width="70%", fig.align = 'center', echo=FALSE}
-ggplot(all_olympics, aes(x = Avg_GDP, y = Total, xlim=(1000), color="orange"))  + xlab("GDP (Millions)") + ylab("Total Number of Medals") +
-  geom_point()
-
+ggplot(all_olympics, aes(x = Avg_Temp, y = Total, xlim=(1000), color="blue"))  + xlab("Average Temperature(C))") + ylab("Total Number of Medals") +
+  geom_point() +
+  geom_smooth(method = lm, se=FALSE)
 ```
 ]
 ---
@@ -142,7 +143,25 @@ glance(gdp_gold)$r.squared
 
 ---
 
-<<<<<<< HEAD
+##World Map
+
+```{r world-map, echo=FALSE}
+m <- leaflet() %>%
+  addTiles() %>% 
+  addCircleMarkers(lng = 62, lat = 15, color = 'red') %>% 
+  addCircleMarkers(lng = 52.5, lat = 5.75, color = 'blue')%>%
+  addCircleMarkers(lng = 35, lat = 105, color = 'purple')%>%
+  addCircleMarkers(lng = 51, lat = 9, color = 'yellow') %>%
+  addCircleMarkers(lng = 62, lat = 10, color = 'pink') %>%
+  addCircleMarkers(lng = 42.83, lat = 12.83, color = 'black') %>%
+  addCircleMarkers(lng = 60, lat = 100, color = 'orange') %>%
+  addCircleMarkers(lng = 47.33, lat = 13.33, color = 'white') %>%
+  addCircleMarkers(lng = 46, lat = 15, color = 'green' )
+  
+m  # Print the map
+
+```
+
 ##Sams graph
 ```{r athletesVSpopulation}
 ggplot(all_olympics, aes(x = Population, y = Num_Athletes, xlim=(1000), color="red"))  + xlab("Population") + ylab("Number of Athletes") +
@@ -165,8 +184,6 @@ ggplot(all_olympics, aes(x = NOC, y = Num_Athletes, color = Total)) +
 ```
 ---
 
-=======
->>>>>>> 5181451c074fd87f1846c22bd4be2ed6232e0e57
 
 
 ```{r image-2, echo=FALSE}
@@ -177,18 +194,23 @@ style_xaringan(
 ---
 
 
-# Images
+---
+###Goals
+.pull-center[
+* Hypothesis: Olympians who live in a warmer climate or receive less funding are less likely to get attention or achieve good results
+* Goal 1: Investigate for a correlation between both average temperature and medal count 
+* Goal 2: Investigate for a correlation between GDP and medal count
+]
 
-include_graphics("https://images.unsplash.com/photo-1535448033526-c0e85c9e6968?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80")
+---
+##World map 2 
+
+
+---
+```{r image-2-olympic, echo=FALSE}
+style_xaringan(
+  title_slide_background_image = "img/olympics1.jpg"
+)
 ```
-
-Or you can also include a full page image. See next slide.
-
 ---
-
-background-image: url(https://images.unsplash.com/photo-1535448033526-c0e85c9e6968?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80)
-
----
-
-
 
