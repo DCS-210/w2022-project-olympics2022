@@ -26,6 +26,6 @@ Our presentation can be found [here](presentation/presentation.html).
 * Chavan, Akshay 2020, "Average Temperature per country per year", Kaggle, viewed 22 February 2022, https://www.kaggle.com/code/akshaychavan/average-temperature-per-country-per-year/data
 ## References
 
-Background Image: https://olympics.com/ioc/olympic-rings
-Image 1: https://www.disneyplus.com/movies/cool-runnings/1zyvW8wIgqET
-Image 2: https://www.sportingnews.com/us/olympics/news/olympics-medal-count-2022-gold-silver-bronze/q7x3klukq471udtxhrsawd5w
+* Background Image: https://olympics.com/ioc/olympic-rings
+* Image 1: https://www.disneyplus.com/movies/cool-runnings/1zyvW8wIgqET
+* Image 2: https://www.sportingnews.com/us/olympics/news/olympics-medal-count-2022-gold-silver-bronze/q7x3klukq471udtxhrsawd5w
