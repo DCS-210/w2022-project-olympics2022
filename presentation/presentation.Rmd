@@ -1,16 +1,7 @@
 ---
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-title: "Olympics: Skill or Other Variables"
-subtitle: "How does economics status, population, location, etc affect medal counts"
->>>>>>> 19bbf59213857a81e23adbfcca2565cec2c947f7
-author: "Amy, Sam, and Dylan"
-=======
 title: "Olympics: Cash, Climate, and Champions"
 subtitle: "Effect of GDP and Temperature on Medal Count"
 name: "Amy Townend, Sam Simmons, Dylan Williams"
->>>>>>> 8ab7fea14d956ec63839e828ecf7ba9a48c0964a
 institute: "Bates College"
 date: "`r Sys.Date()`"
 output:
@@ -28,7 +19,7 @@ output:
 ```{r include=FALSE}
 library(readr)
 all_olympics <- read_csv("/cloud/project/data/all_olympics.csv")
-#View(all_olympics)
+View(all_olympics)
 ```
 
 ```{r load-packages, include = FALSE}
@@ -42,21 +33,13 @@ install.packages("leaflet")
 
 ```
 
+
 ```{r setup, include=FALSE}
 # For better figure resolution
 knitr::opts_chunk$set(fig.retina = 3, dpi = 300, fig.width = 6, fig.asp = 0.618, out.width = "80%")
 ```
 
-```{r include= FALSE}
-#define new column to add
-#medals_type2 <- c(Gold, Silver, Bronze)
 
-#add column called 'new'
-#all_olympics$medals_type1 <- new
-
-#view new data frame
-#all_olympics
-```
 
 class: inverse, center
 ## Consequences of Economic and Temperature differences
@@ -100,7 +83,7 @@ class: inverse, center
 ]
 
 .pull-right[
-```{r dataset-image3, echo = FALSE, out.height = 350, out.width = 600, fig.align = 'right'}
+```{r dataset-image3, echo = FALSE, out.height = 350, out.width = 600, fig.align = 'right', fig.alt = "Three medals, one gold, one silver, one bronze"}
 knitr::include_graphics("img/medalspic.jpg")
 ```
 ]
@@ -111,6 +94,14 @@ knitr::include_graphics("img/medalspic.jpg")
 ---
 
 ##Gold Medals Per Country 
+
+```{r group-by-medals, include = FALSE}
+condition <- rep(c("GOLD" , "SILVER" , "Bronze") , 4)
+  
+
+
+```
+
 .pull-center[
 ```{r medals_p, echo = FALSE, warning = FALSE, out.width="70%", fig.align = 'center', echo=FALSE}
 all_olympics %>%
@@ -151,6 +142,7 @@ glance(gdp_gold)$r.squared
 
 ---
 
+<<<<<<< HEAD
 ##Sams graph
 ```{r athletesVSpopulation}
 ggplot(all_olympics, aes(x = Population, y = Num_Athletes, xlim=(1000), color="red"))  + xlab("Population") + ylab("Number of Athletes") +
@@ -164,6 +156,8 @@ ggplot(all_olympics, aes(x = Population, y = Num_Athletes, xlim=(1000), color="r
 ```
 ---
 
+=======
+>>>>>>> 5181451c074fd87f1846c22bd4be2ed6232e0e57
 
 
 ```{r image-2, echo=FALSE}
