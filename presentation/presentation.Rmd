@@ -156,7 +156,6 @@ glance(gdp_gold)$r.squared
 ggplot(all_olympics, aes(x = Population, y = Num_Athletes, xlim=(1000), color="red"))  + xlab("Population") + ylab("Number of Athletes") +
   geom_point(shape = 16, size = 5) +
   theme_minimal()
-
 ```
 
 
