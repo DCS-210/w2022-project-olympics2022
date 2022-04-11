@@ -151,8 +151,8 @@ ggplot(all_olympics, aes(x = Population, y = Num_Athletes, xlim=(1000), color="r
 ```
 
 ```{r sam2nd}
-ggplot(all_olympics, aes(x = Num_Athletes, y = NOC, color = Total)) +
-  xlab("Number of Athletes") + ylab("Country") +
+ggplot(all_olympics, aes(x = NOC, y = Num_Athletes, color = Total)) +
+  xlab("Country") + ylab("Number of Athletes") +
   geom_point()
   theme_minimal()
 
