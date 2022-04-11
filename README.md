@@ -7,6 +7,8 @@ The 2022 Winter Olympics which was hosted in Beijing included the participation 
 
 For our project, we decided to investigate the effect of climate and economic status on medal count at the Winter 2022 Olympics. We got our data from Kaggle in which someone created a data set which was updated daily with the new medal count. In order to get climate data on the countries we chose, we were able to access another database on Kaggle which gave us the average temperatures. Finally, in order to judge how an economic status would affect a country’s ability to have good athlete participation, we downloaded a data set from the World Bank. In order to get a good feel on the number of athletes qualified vs total population, we also collected total populations from 2020 since that is the most present data we could get. In order to run our visualizations and regressions, we were able to merge these data sets in a summary data frame. This is a very preliminary study into correlations between these variables and an extensive analysis would needed to be done with much more data and variables to avoid omitted variable bias. 
 
+
+
 For another data visualization, we graphed population versus number of athletes per country. These variables are important to analyze because there are several takeaways from comparing population and number of athletes per country. The reason most of the data on the graph is close to the y-axis is because there is a large outlier on the right side that causes a distinctive distribution of athletes per country. China has quite a large population, deviating from the average population, at 1439323776 people. Another notable takeaway from the graph is that Norway has the greatest number of olympic medals, 37. 
 
 
@@ -17,12 +19,13 @@ Our presentation can be found [here](presentation/presentation.html).
 
 ## Data
 
-Include a citation for your data here. See
-<http://libraryguides.vu.edu.au/c.php?g=386501&p=4347840> for guidance
-on proper citation for datasets. If you got your data off the web, make
-sure to note the retrieval date.
-
+Sarkhel, Arjun Prasad 2022, "2022 Winter Olympics Beijing", Kaggle , viewed 19 February 2022, https://www.kaggle.com/datasets/arjunprasadsarkhel/2022-winter-olympics-beijing.
+World Bank. "GDP (constant 2015 US$)" World Development Indicators, The World Bank Group, 2015,https://data.worldbank.org/indicator/NY.GDP.MKTP.KD.
+Worldometer. "Countries in the world by population (2022)", https://www.worldometers.info/world-population/population-by-country/
+Freedom House. "Global Freedom Scores" Freedom House, 2020, https://freedomhouse.org/countries/freedom-world/scores
+Chavan, Akshay 2020, "Average Temperature per country per year", Kaggle, viewed 22 February 2022, https://www.kaggle.com/code/akshaychavan/average-temperature-per-country-per-year/data
 ## References
 
-List any references here. You should, at a minimum, list your data
-source.
+Background Image: https://olympics.com/ioc/olympic-rings
+Image 1: https://www.disneyplus.com/movies/cool-runnings/1zyvW8wIgqET
+Image 2: https://www.sportingnews.com/us/olympics/news/olympics-medal-count-2022-gold-silver-bronze/q7x3klukq471udtxhrsawd5w
