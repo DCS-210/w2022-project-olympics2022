@@ -1,6 +1,9 @@
 ---
 title: "Olympics2022"
-output: html_document
+output:
+  pdf_document: default
+  github_document:
+    df_print: paged
 ---
 ```{r}
 library(ggplot2)
