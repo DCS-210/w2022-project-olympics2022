@@ -1,16 +1,7 @@
 ---
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-title: "Olympics: Skill or Other Variables"
-subtitle: "How does economics status, population, location, etc affect medal counts"
->>>>>>> 19bbf59213857a81e23adbfcca2565cec2c947f7
-author: "Amy, Sam, and Dylan"
-=======
 title: "Olympics: Cash, Climate, and Champions"
 subtitle: "Effect of GDP and Temperature on Medal Count"
 name: "Amy Townend, Sam Simmons, Dylan Williams"
->>>>>>> 8ab7fea14d956ec63839e828ecf7ba9a48c0964a
 institute: "Bates College"
 date: "`r Sys.Date()`"
 output:
@@ -38,6 +29,8 @@ library(tidymodels)
 library(palmerpenguins)
 library(knitr)
 library(xaringanthemer)
+library(ggplot2)
+library(hrbrthemes)
 install.packages("leaflet")
 
 ```
@@ -158,7 +151,21 @@ glance(gdp_gold)$r.squared
 
 #Dylan graph
 ```{r}
+all_olympics <- all_olympics %>% mutate(temp_cat = case_when(Avg_Temp <= 0 ~ "Below Zero",
+                                             Avg_Temp > 0 & Avg_Temp <= 4 ~ "0-4 degrees", Avg_Temp > 4 & Avg_Temp <= 8 ~ "4-8 degrees", Avg_Temp > 8 & Avg_Temp <= 12 ~"8-12 degrees", TRUE ~ "Above 12")) %>% drop_na(NOC)
+
+ggplot(all_olympics, aes(fct_reorder(NOC, Total), fct_reorder(temp_cat, Avg_Temp), fill= Total)) +
+  geom_tile() +
+  scale_fill_gradient(low="white", high="blue") +
+  coord_flip() +
+  labs(x = "Country",
+       y = "Average Winter Temp (degrees celsius)",
+       fill = "Total Olympic Medals",
+       title = "Correlation between Total Winter Olympic 2022 Medals won By Country with Temp") +
+  theme(axis.text.x = element_text(angle = 60, hjust = 1, vjust = 1))
+  
 ```
+
 ---
 
 
