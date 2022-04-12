@@ -97,7 +97,7 @@ knitr::include_graphics("img/medalspic.jpg")
 ##Gold Medals Per Country 
 
 .pull-center[
-```{r medals_p, echo = FALSE, warning = FALSE, out.width="70%", fig.align = 'center', echo=FALSE}
+```{r medals_p, echo = FALSE, warning = FALSE, out.width="70%", fig.align = 'center', echo=FALSE, fig.alt= "Stacked bar plot showing total number of metals per country divided into gold, silver and bronze"}
 
 all_olympics_long <- all_olympics %>%
   pivot_longer(
@@ -117,7 +117,7 @@ all_olympics_long %>%
 ---
 ## Average Temperature vs Total Medals
 .pull-center[
-```{r gdp-vs-gold-medals, echo=FALSE, fig.align='center', warning=FALSE, out.width="70%"}
+```{r gdp-vs-gold-medals, echo=FALSE, fig.align='center', warning=FALSE, out.width="70%", fig.alt= "Scatterplot showing average temperature vs total number of medals"}
 ggplot(all_olympics, aes(x = Avg_Temp, y = Total, xlim=(1000), fill = "Political Freedom"))  + xlab("Average Temperature(C))") + ylab("Total Number of Medals") +
   geom_point() +
   geom_smooth(method = lm, se=FALSE)
@@ -133,7 +133,7 @@ ggplot(all_olympics, aes(x = Avg_Temp, y = Total, xlim=(1000), fill = "Political
 * Our R^2 value was 0.09337504
 ]
 
-```{r GDP-VS-GOLD , echo = FALSE, warning = FALSE, out.width="70%", fig.align = 'center', echo=FALSE}
+```{r GDP-VS-GOLD , echo = FALSE, warning = FALSE, out.width="70%", fig.align = 'center', echo=FALSE, fig.alt= "Linear regression showing correlation between gold medals and average GDP" }
 gdp_gold <- linear_reg() %>%
   set_engine("lm") %>%
   fit(Avg_GDP ~ Gold, data = all_olympics)
@@ -149,7 +149,7 @@ glance(gdp_gold)$r.squared
 
 .pull-center[
 
-```{r world-map, echo=FALSE}
+```{r world-map, echo=FALSE, fig.align='center', warning=FALSE, out.width="70%", fig.alt="World map with circles showing countries in data set"}
 m <- leaflet() %>%
   addTiles() %>% 
   addCircleMarkers(lng = 62, lat = 15, color = 'red') %>% 
@@ -161,28 +161,28 @@ m <- leaflet() %>%
   addCircleMarkers(lng = 60, lat = 100, color = 'orange') %>%
   addCircleMarkers(lng = 47.33, lat = 13.33, color = 'white') %>%
   addCircleMarkers(lng = 46, lat = 15, color = 'green' )%>%
-  addCircleMarkers(lng = 2.2138 , lat =46.27 , color = 'dark red' )%>%
-  addCircleMarkers(lng = 60, lat = -95, color = 'dark green' ) %>%
-  addCircleMarkers(lng = 138, lat = 36 , color = 'aqua' ) %>%
-  addCircleMarkers(lng = 8.2275, lat = 46.8, color = 'dark purple' )%>%
+  addCircleMarkers(lng = 2.2138 , lat =46.27 , color = 'purple4' )%>%
+  addCircleMarkers(lng = 60, lat = -95, color = 'plum1' ) %>%
+  addCircleMarkers(lng = 138, lat = 36 , color = 'wheat' ) %>%
+  addCircleMarkers(lng = 8.2275, lat = 46.8, color = 'steelblue1' )%>%
   addCircleMarkers(lng = 46, lat = 15, color = 'gold' )%>%
-  addCircleMarkers(lng = -27, lat = 133, color = 'dark pink' )%>%
-  addCircleMarkers(lng = 	49.75, lat = 15.546, color = 'mistyrose2' )%>%
+  addCircleMarkers(lng = -27, lat = 133, color = 'peachpuff1')%>%
+  addCircleMarkers(lng = 	49.75, lat = 15.546, color = 'mistyrose2')%>%
   addCircleMarkers(lng = 	-41, lat = 147, color = 'salmon2' )%>%
   addCircleMarkers(lng = 	38, lat = -97, color = 'forestgreen' )%>%
   addCircleMarkers(lng = 	53, lat = 28, color = 'maroon2' )%>%
   addCircleMarkers(lng = 	47, lat = 20, color = 'maroon' )%>%
   addCircleMarkers(lng = 	64, lat = 26, color = 'palegreen' )%>%
   addCircleMarkers(lng = 	40, lat = 127, color = 'turquoise2' )%>%
-  addCircleMarkers(lng = 	52, lat = 20, color = 'royalblue4' )
+  addCircleMarkers(lng = 	52, lat = 20, color = 'royalblue4')
 m  # Print the map
 
 ```
 ]
 
-.pull-right[
+.pull-left[
 * A lot of our data comes from Europe 
-* Cause a bias in our analysis
+* Causes a bias in our analysis
 
 ]
 ---
@@ -205,7 +205,7 @@ ggplot(all_olympics, aes(x = Num_Athletes, y = NOC, color = Total)) +
 
 ---
 
-#Dylan graph
+#Heatmap: Temperature vs Medal counts
 ```{r heat-map, echo = FALSE}
 all_olympics <- all_olympics %>% mutate(temp_cat = case_when(Avg_Temp <= 0 ~ "Below Zero",
                                              Avg_Temp > 0 & Avg_Temp <= 4 ~ "0-4 degrees", Avg_Temp > 4 & Avg_Temp <= 8 ~ "4-8 degrees", Avg_Temp > 8 & Avg_Temp <= 12 ~"8-12 degrees", TRUE ~ "Above 12")) %>% drop_na(NOC)
@@ -232,18 +232,27 @@ style_xaringan(
 
 
 ---
-###Goals
+###What our Goals were 
 .pull-center[
 * Hypothesis: Olympians who live in a warmer climate or receive less funding are less likely to get attention or achieve good results
 * Goal 1: Investigate for a correlation between both average temperature and medal count 
 * Goal 2: Investigate for a correlation between GDP and medal count
+
 ]
 
----
-##World map 2 
+What we Achieved 
+.pull-center[
+* Low R^2 value between gold medals and average GDP
+* Heat map shows possibility of temperature and medals correlation
+* More variables need to be included
+]
 
+```{r dataset-image4, echo = FALSE, out.height = 200, out.width = 300, fig.align = 'right', fig.alt = "Three medals, one gold, one silver, one bronze"}
+knitr::include_graphics("img/question.jpg")
+```
 
 ---
+
 ```{r image-2-olympic, echo=FALSE}
 style_xaringan(
   title_slide_background_image = "img/olympics1.jpg"
