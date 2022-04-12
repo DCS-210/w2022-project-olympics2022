@@ -21,6 +21,8 @@ For another data visualization, we graphed population versus number of athletes 
 
 Having only a few countries represented in our data set allows us to take a deeper dive into the analysis of medal counts. One of our visualizations involves 3 variables. The three variables: total number of medals won, country, and number of athletes are represented in this visualization. The country of origin is represented on the x-axis and the number of athletes is represented on the y-axis. Since the total number of medals won is a numeric value, ggplot created a legend with a continuous color scale to represent the amount of medals won. A higher count of medals(closer to 30) is represented with a light shade of blue whereas a lower number of medals won is represented as a darker navy blue.  A takeaway from this data visualization is that the greater the number of athletes representing a country, the more total medals that country has won. 
 
+This data analysis can lead to future development of a country. They can detect the mistakes they’ve made recently and find better ways to train for the next Olympics. Every country should perform an analysis or have one provided to them so that they can receive help in the improvement of their policies and strategies by providing current statistics to them. For future research, we could analyze more countries(possibly all countries) given more time. We could also look into other variables such as gender, height, income, education, and several others. This would allow us for a deeper analysis. Having a shorter period of time for this analysis causes some limitations on our dataset. 
+
 ## Presentation
 
 Our presentation can be found [here](presentation/presentation.html).
