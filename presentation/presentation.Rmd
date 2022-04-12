@@ -29,6 +29,8 @@ library(tidymodels)
 library(palmerpenguins)
 library(knitr)
 library(xaringanthemer)
+library(ggplot2)
+library(hrbrthemes)
 library(leaflet)
 install.packages("leaflet")
 
@@ -173,11 +175,6 @@ m <- leaflet() %>%
   addCircleMarkers(lng = 	64, lat = 26, color = 'palegreen' )%>%
   addCircleMarkers(lng = 	40, lat = 127, color = 'turquoise2' )%>%
   addCircleMarkers(lng = 	52, lat = 20, color = 'royalblue4' )
-  
-  
-
-
-  
 m  # Print the map
 
 ```
@@ -191,13 +188,14 @@ m  # Print the map
 ---
 
 ##Sams graph
-```{r athletesVSpopulation}
+```{r athletesVSpopulation, echo=FALSE}
 ggplot(all_olympics, aes(x = Population, y = Num_Athletes, xlim=(1000), color="red"))  + xlab("Population") + ylab("Number of Athletes") +
   geom_point(shape = 16, size = 5) +
   theme_minimal()
 ```
-
-```{r sam2nd}
+---
+###Sams2 Graph
+```{r sam2nd, echo=FALSE}
 ggplot(all_olympics, aes(x = Num_Athletes, y = NOC, color = Total)) +
   xlab("Number of Athletes") + ylab("Country") +
   geom_point()
@@ -205,15 +203,32 @@ ggplot(all_olympics, aes(x = Num_Athletes, y = NOC, color = Total)) +
 
 ```
 
+---
 
+#Dylan graph
+```{r heat-map, echo = FALSE}
+all_olympics <- all_olympics %>% mutate(temp_cat = case_when(Avg_Temp <= 0 ~ "Below Zero",
+                                             Avg_Temp > 0 & Avg_Temp <= 4 ~ "0-4 degrees", Avg_Temp > 4 & Avg_Temp <= 8 ~ "4-8 degrees", Avg_Temp > 8 & Avg_Temp <= 12 ~"8-12 degrees", TRUE ~ "Above 12")) %>% drop_na(NOC)
 
+ggplot(all_olympics, aes(fct_reorder(NOC, Total), fct_reorder(temp_cat, Avg_Temp), fill= Total)) +
+  geom_tile() +
+  scale_fill_gradient(low="white", high="blue") +
+  coord_flip() +
+  labs(x = "Country",
+       y = "Average Winter Temp (degrees celsius)",
+       fill = "Total Olympic Medals",
+       title = "Correlation between Total Winter Olympic 2022 Medals won By Country with Temp") +
+  theme(axis.text.x = element_text(angle = 60, hjust = 1, vjust = 1))
+  
+```
+
+---
 
 ```{r image-2, echo=FALSE}
 style_xaringan(
   title_slide_background_image = "img/olympics1.jpg"
 )
 ```
----
 
 
 ---
