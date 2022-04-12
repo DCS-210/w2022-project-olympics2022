@@ -115,8 +115,8 @@ all_olympics_long %>%
 ---
 ## Average Temperature vs Total Medals
 .pull-center[
-```{r gdp-vs-gold-medals , echo = FALSE, warning = FALSE, out.width="70%", fig.align = 'center', echo=FALSE}
-ggplot(all_olympics, aes(x = Avg_Temp, y = Total, xlim=(1000), color="blue"))  + xlab("Average Temperature(C))") + ylab("Total Number of Medals") +
+```{r gdp-vs-gold-medals, echo=FALSE, fig.align='center', warning=FALSE, out.width="70%"}
+ggplot(all_olympics, aes(x = Avg_Temp, y = Total, xlim=(1000), fill = "Political Freedom"))  + xlab("Average Temperature(C))") + ylab("Total Number of Medals") +
   geom_point() +
   geom_smooth(method = lm, se=FALSE)
 ```
@@ -145,6 +145,8 @@ glance(gdp_gold)$r.squared
 
 ##World Map
 
+.pull-center[
+
 ```{r world-map, echo=FALSE}
 m <- leaflet() %>%
   addTiles() %>% 
@@ -156,11 +158,37 @@ m <- leaflet() %>%
   addCircleMarkers(lng = 42.83, lat = 12.83, color = 'black') %>%
   addCircleMarkers(lng = 60, lat = 100, color = 'orange') %>%
   addCircleMarkers(lng = 47.33, lat = 13.33, color = 'white') %>%
-  addCircleMarkers(lng = 46, lat = 15, color = 'green' )
+  addCircleMarkers(lng = 46, lat = 15, color = 'green' )%>%
+  addCircleMarkers(lng = 2.2138 , lat =46.27 , color = 'dark red' )%>%
+  addCircleMarkers(lng = 60, lat = -95, color = 'dark green' ) %>%
+  addCircleMarkers(lng = 138, lat = 36 , color = 'aqua' ) %>%
+  addCircleMarkers(lng = 8.2275, lat = 46.8, color = 'dark purple' )%>%
+  addCircleMarkers(lng = 46, lat = 15, color = 'gold' )%>%
+  addCircleMarkers(lng = -27, lat = 133, color = 'dark pink' )%>%
+  addCircleMarkers(lng = 	49.75, lat = 15.546, color = 'mistyrose2' )%>%
+  addCircleMarkers(lng = 	-41, lat = 147, color = 'salmon2' )%>%
+  addCircleMarkers(lng = 	38, lat = -97, color = 'forestgreen' )%>%
+  addCircleMarkers(lng = 	53, lat = 28, color = 'maroon2' )%>%
+  addCircleMarkers(lng = 	47, lat = 20, color = 'maroon' )%>%
+  addCircleMarkers(lng = 	64, lat = 26, color = 'palegreen' )%>%
+  addCircleMarkers(lng = 	40, lat = 127, color = 'turquoise2' )%>%
+  addCircleMarkers(lng = 	52, lat = 20, color = 'royalblue4' )
+  
+  
+
+
   
 m  # Print the map
 
 ```
+]
+
+.pull-right[
+* A lot of our data comes from Europe 
+* Cause a bias in our analysis
+
+]
+---
 
 ##Sams graph
 ```{r athletesVSpopulation}
@@ -177,12 +205,6 @@ ggplot(all_olympics, aes(x = Num_Athletes, y = NOC, color = Total)) +
 
 ```
 
-
-
-#Dylan graph
-```{r}
-```
----
 
 
 
