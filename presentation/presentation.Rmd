@@ -29,27 +29,24 @@ library(tidymodels)
 library(palmerpenguins)
 library(knitr)
 library(xaringanthemer)
+<<<<<<< HEAD
 library(ggplot2)
 library(hrbrthemes)
+=======
+library(leaflet)
+>>>>>>> 7fa307a1591fe44cc2eda7ac1a205d9a9b90db4e
 install.packages("leaflet")
 
+
 ```
+
 
 ```{r setup, include=FALSE}
 # For better figure resolution
 knitr::opts_chunk$set(fig.retina = 3, dpi = 300, fig.width = 6, fig.asp = 0.618, out.width = "80%")
 ```
 
-```{r include= FALSE}
-#define new column to add
-#medals_type2 <- c(Gold, Silver, Bronze)
 
-#add column called 'new'
-#all_olympics$medals_type1 <- new
-
-#view new data frame
-#all_olympics
-```
 
 class: inverse, center
 ## Consequences of Economic and Temperature differences
@@ -61,9 +58,6 @@ class: inverse, center
 
 * Don't believe us? https://olympics.com/en/news/which-tropical-nation-will-win-an-olympic-winter-games-medal 
 * Olympians earn sponsorship from their athletic achievements
-* Hypothesis: Olympians who live in a warmer climate or receive less funding are less likely to get attention or achieve good results
-* Goal 1: Investigate for a correlation between both average temperature and medal count 
-*Goal 2: Investigate for a correlation between GDP and medal count
 ]
 
 .pull-right[
@@ -93,7 +87,7 @@ class: inverse, center
 ]
 
 .pull-right[
-```{r dataset-image3, echo = FALSE, out.height = 350, out.width = 600, fig.align = 'right'}
+```{r dataset-image3, echo = FALSE, out.height = 350, out.width = 600, fig.align = 'right', fig.alt = "Three medals, one gold, one silver, one bronze"}
 knitr::include_graphics("img/medalspic.jpg")
 ```
 ]
@@ -104,22 +98,32 @@ knitr::include_graphics("img/medalspic.jpg")
 ---
 
 ##Gold Medals Per Country 
+
 .pull-center[
 ```{r medals_p, echo = FALSE, warning = FALSE, out.width="70%", fig.align = 'center', echo=FALSE}
-all_olympics %>%
-  ggplot(aes(x=fct_reorder(NOC, Gold), y= Total, fill = )) +
-  geom_bar(position = "stack", stat="identity", color = "gold", width=0.005) +
+
+all_olympics_long <- all_olympics %>%
+  pivot_longer(
+    cols = c("Gold", "Silver", "Bronze"),
+    names_to = "Medal",
+    values_to = "Num_Medals"
+  )
+
+
+all_olympics_long %>%
+  ggplot(aes(x= NOC , y= Num_Medals , fill = Medal)) +
+  geom_bar(position = "stack", stat="identity", width= 0.5 ) +
   theme_minimal() +
   coord_flip()
 ```
 ]
 ---
-## GDP vs Total Medals
+## Average Temperature vs Total Medals
 .pull-center[
 ```{r gdp-vs-gold-medals , echo = FALSE, warning = FALSE, out.width="70%", fig.align = 'center', echo=FALSE}
-ggplot(all_olympics, aes(x = Avg_GDP, y = Total, xlim=(1000), color="orange"))  + xlab("GDP (Millions)") + ylab("Total Number of Medals") +
-  geom_point()
-
+ggplot(all_olympics, aes(x = Avg_Temp, y = Total, xlim=(1000), color="blue"))  + xlab("Average Temperature(C))") + ylab("Total Number of Medals") +
+  geom_point() +
+  geom_smooth(method = lm, se=FALSE)
 ```
 ]
 ---
@@ -144,10 +148,41 @@ glance(gdp_gold)$r.squared
 
 ---
 
-##Sams graph
-```{r}
+##World Map
+
+```{r world-map, echo=FALSE}
+m <- leaflet() %>%
+  addTiles() %>% 
+  addCircleMarkers(lng = 62, lat = 15, color = 'red') %>% 
+  addCircleMarkers(lng = 52.5, lat = 5.75, color = 'blue')%>%
+  addCircleMarkers(lng = 35, lat = 105, color = 'purple')%>%
+  addCircleMarkers(lng = 51, lat = 9, color = 'yellow') %>%
+  addCircleMarkers(lng = 62, lat = 10, color = 'pink') %>%
+  addCircleMarkers(lng = 42.83, lat = 12.83, color = 'black') %>%
+  addCircleMarkers(lng = 60, lat = 100, color = 'orange') %>%
+  addCircleMarkers(lng = 47.33, lat = 13.33, color = 'white') %>%
+  addCircleMarkers(lng = 46, lat = 15, color = 'green' )
+  
+m  # Print the map
+
 ```
----
+
+##Sams graph
+```{r athletesVSpopulation}
+ggplot(all_olympics, aes(x = Population, y = Num_Athletes, xlim=(1000), color="red"))  + xlab("Population") + ylab("Number of Athletes") +
+  geom_point(shape = 16, size = 5) +
+  theme_minimal()
+```
+
+```{r sam2nd}
+ggplot(all_olympics, aes(x = Num_Athletes, y = NOC, color = Total)) +
+  xlab("Number of Athletes") + ylab("Country") +
+  geom_point()
+  theme_minimal()
+
+```
+
+
 
 #Dylan graph
 ```{r}
@@ -178,18 +213,23 @@ style_xaringan(
 ---
 
 
-# Images
+---
+###Goals
+.pull-center[
+* Hypothesis: Olympians who live in a warmer climate or receive less funding are less likely to get attention or achieve good results
+* Goal 1: Investigate for a correlation between both average temperature and medal count 
+* Goal 2: Investigate for a correlation between GDP and medal count
+]
 
-include_graphics("https://images.unsplash.com/photo-1535448033526-c0e85c9e6968?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80")
+---
+##World map 2 
+
+
+---
+```{r image-2-olympic, echo=FALSE}
+style_xaringan(
+  title_slide_background_image = "img/olympics1.jpg"
+)
 ```
-
-Or you can also include a full page image. See next slide.
-
 ---
-
-background-image: url(https://images.unsplash.com/photo-1535448033526-c0e85c9e6968?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80)
-
----
-
-
 
