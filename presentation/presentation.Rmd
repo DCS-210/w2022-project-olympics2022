@@ -32,8 +32,7 @@ library(xaringanthemer)
 library(ggplot2)
 library(hrbrthemes)
 library(leaflet)
-install.packages("leaflet")
-
+#install.packages("leaflet")
 
 ```
 
@@ -93,7 +92,7 @@ knitr::include_graphics("img/medalspic.jpg")
 ###### Image: Olympic Medals
 ]
 ---
-
+class: inverse, center
 ##Gold Medals Per Country 
 
 .pull-center[
@@ -115,6 +114,7 @@ all_olympics_long %>%
 ```
 ]
 ---
+class: inverse, center
 ## Average Temperature vs Total Medals
 .pull-center[
 ```{r gdp-vs-gold-medals, echo=FALSE, fig.align='center', warning=FALSE, out.width="70%", fig.alt= "Scatterplot showing average temperature vs total number of medals"}
@@ -124,7 +124,7 @@ ggplot(all_olympics, aes(x = Avg_Temp, y = Total, xlim=(1000), fill = "Political
 ```
 ]
 ---
-
+class: inverse, center
 ## Regression
 
 .pull-center[
@@ -144,8 +144,9 @@ glance(gdp_gold)$r.squared
 ```
 
 ---
-
+class: inverse, center
 ##World Map
+
 
 .pull-center[
 
@@ -185,16 +186,19 @@ m  # Print the map
 * Causes a bias in our analysis
 
 ]
----
 
-##Sams graph
+
+---
+class: inverse, center
+## Population vs Athletes
 ```{r athletesVSpopulation, echo=FALSE}
 ggplot(all_olympics, aes(x = Population, y = Num_Athletes, xlim=(1000), color="red"))  + xlab("Population") + ylab("Number of Athletes") +
   geom_point(shape = 16, size = 5) +
   theme_minimal()
 ```
 ---
-###Sams2 Graph
+class: inverse, center
+###Further analysis, showing medal counts
 ```{r sam2nd, echo=FALSE}
 ggplot(all_olympics, aes(x = Num_Athletes, y = NOC, color = Total)) +
   xlab("Number of Athletes") + ylab("Country") +
@@ -204,7 +208,7 @@ ggplot(all_olympics, aes(x = Num_Athletes, y = NOC, color = Total)) +
 ```
 
 ---
-
+class: inverse, center
 #Heatmap: Temperature vs Medal counts
 ```{r heat-map, echo = FALSE}
 all_olympics <- all_olympics %>% mutate(temp_cat = case_when(Avg_Temp <= 0 ~ "Below Zero",
@@ -221,9 +225,6 @@ ggplot(all_olympics, aes(fct_reorder(NOC, Total), fct_reorder(temp_cat, Avg_Temp
   theme(axis.text.x = element_text(angle = 60, hjust = 1, vjust = 1))
   
 ```
-
----
-
 ```{r image-2, echo=FALSE}
 style_xaringan(
   title_slide_background_image = "img/olympics1.jpg"
@@ -232,6 +233,7 @@ style_xaringan(
 
 
 ---
+class: inverse, center
 ###What our Goals were 
 .pull-center[
 * Hypothesis: Olympians who live in a warmer climate or receive less funding are less likely to get attention or achieve good results
@@ -251,12 +253,8 @@ What we Achieved
 knitr::include_graphics("img/question.jpg")
 ```
 
----
-
 ```{r image-2-olympic, echo=FALSE}
 style_xaringan(
   title_slide_background_image = "img/olympics1.jpg"
 )
 ```
----
-
