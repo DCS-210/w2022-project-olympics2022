@@ -332,8 +332,6 @@ knitr::include_graphics("img/italy.jpg")
 
 
 ]
----
-
 
 ```{r image-2-olympic, echo=FALSE}
 style_xaringan(
