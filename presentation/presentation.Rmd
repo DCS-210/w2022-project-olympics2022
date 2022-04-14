@@ -241,6 +241,11 @@ background-image: url(https://olympics.nbcsports.com/wp-content/uploads/sites/10
 class: center
 .pull-center[
 
+<<<<<<< HEAD
+```{r sam2nd}
+ggplot(all_olympics, aes(x = NOC, y = Num_Athletes, color = Total)) +
+  xlab("Country") + ylab("Number of Athletes") +
+=======
 #Medal Counts
 ]
 ---
@@ -249,6 +254,7 @@ class: inverse, center
 ```{r sam2nd, echo=FALSE}
 ggplot(all_olympics, aes(x = Num_Athletes, y = NOC, color = Total)) +
   xlab("Number of Athletes") + ylab("Country") +
+>>>>>>> 714a82033744e80d83a580b5aae3ecf935720cba
   geom_point()
   theme_minimal()
 
