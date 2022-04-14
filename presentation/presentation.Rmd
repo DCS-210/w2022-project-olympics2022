@@ -17,8 +17,8 @@ output:
 ---
 
 ```{r include=FALSE}
-library(readr)
-all_olympics <- read_csv("/cloud/project/data/all_olympics.csv")
+#library(readr)
+#all_olympics <- read_csv("/cloud/project/data/all_olympics.csv")
 #View(all_olympics)
 ```
 
@@ -45,7 +45,7 @@ knitr::opts_chunk$set(fig.retina = 3, dpi = 300, fig.width = 6, fig.asp = 0.618,
 
 
 class: inverse, center
-## Consequences of Economic and Temperature differences
+## Introduction
 .pull-left[
 
 * In the 2022 Olympics, there were 91 countries and 109 gold medals awarded.
@@ -53,7 +53,8 @@ class: inverse, center
 * No athlete from a tropical country has ever won a metal in the Winter Olympics(crazy right?)
 
 * Don't believe us? https://olympics.com/en/news/which-tropical-nation-will-win-an-olympic-winter-games-medal 
-* Olympians earn sponsorship from their athletic achievements
+* Olympians earn sponsorship from their athletic achievements which allow them to train 
+* With better training facilities and/or climate, do they have a better chance at a medal?
 ]
 
 .pull-right[
@@ -241,11 +242,6 @@ background-image: url(https://olympics.nbcsports.com/wp-content/uploads/sites/10
 class: center
 .pull-center[
 
-<<<<<<< HEAD
-```{r sam2nd}
-ggplot(all_olympics, aes(x = NOC, y = Num_Athletes, color = Total)) +
-  xlab("Country") + ylab("Number of Athletes") +
-=======
 #Medal Counts
 ]
 ---
@@ -254,7 +250,6 @@ class: inverse, center
 ```{r sam2nd, echo=FALSE}
 ggplot(all_olympics, aes(x = Num_Athletes, y = NOC, color = Total)) +
   xlab("Number of Athletes") + ylab("Country") +
->>>>>>> 714a82033744e80d83a580b5aae3ecf935720cba
   geom_point()
   theme_minimal()
 
@@ -310,6 +305,10 @@ What we Achieved
 * More variables need to be included
 ]
 
+```{r dataset-image4, echo = FALSE, out.height = 200, out.width = 300, fig.align = 'right', fig.alt = "Red question mark and white man"}
+knitr::include_graphics("img/question.jpg")
+```
+
 
 ---
 class: inverse, center
@@ -335,9 +334,6 @@ knitr::include_graphics("img/italy.jpg")
 ]
 ---
 
-```{r dataset-image4, echo = FALSE, out.height = 200, out.width = 300, fig.align = 'right', fig.alt = "Three medals, one gold, one silver, one bronze"}
-knitr::include_graphics("img/question.jpg")
-```
 
 ```{r image-2-olympic, echo=FALSE}
 style_xaringan(
