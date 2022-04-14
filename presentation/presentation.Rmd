@@ -50,7 +50,7 @@ class: inverse, center
 
 * In the 2022 Olympics, there were 91 countries and 109 gold medals awarded.
 
-* No athlete from a tropical country has ever won a metal in the Winter Olympics(crazy right?)
+* No athlete from a tropical country has ever won a medal in the Winter Olympics(crazy right?)
 
 * Don't believe us? https://olympics.com/en/news/which-tropical-nation-will-win-an-olympic-winter-games-medal 
 * Olympians earn sponsorship from their athletic achievements which allow them to train 
@@ -233,7 +233,7 @@ class: center
 class: inverse, center
 ## Population vs Athletes
 ```{r athletesVSpopulation, echo=FALSE}
-ggplot(all_olympics, aes(x = Population, y = Num_Athletes, xlim=(1000), color="red"))  + xlab("Population") + ylab("Number of Athletes") +
+ggplot(all_olympics, aes(x = Population, y = Num_Athletes, color = NOC, xlim=(1000)))  + xlab("Population") + ylab("Number of Athletes") +
   geom_point(shape = 16, size = 5) +
   theme_minimal()
 ```
