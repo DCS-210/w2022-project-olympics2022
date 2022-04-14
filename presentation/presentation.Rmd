@@ -93,61 +93,7 @@ knitr::include_graphics("img/medalspic.jpg")
 ]
 ---
 class: inverse, center
-##Gold Medals Per Country 
-
-.pull-center[
-```{r medals_p, echo = FALSE, warning = FALSE, out.width="70%", fig.align = 'center', echo=FALSE, fig.alt= "Stacked bar plot showing total number of metals per country divided into gold, silver and bronze"}
-
-all_olympics_long <- all_olympics %>%
-  pivot_longer(
-    cols = c("Gold", "Silver", "Bronze"),
-    names_to = "Medal",
-    values_to = "Num_Medals"
-  )
-
-
-all_olympics_long %>%
-  ggplot(aes(x= NOC , y= Num_Medals , fill = Medal)) +
-  geom_bar(position = "stack", stat="identity", width= 0.5 ) +
-  theme_minimal() +
-  coord_flip()
-```
-]
----
-class: inverse, center
-## Average Temperature vs Total Medals
-.pull-center[
-```{r gdp-vs-gold-medals, echo=FALSE, fig.align='center', warning=FALSE, out.width="70%", fig.alt= "Scatterplot showing average temperature vs total number of medals"}
-ggplot(all_olympics, aes(x = Avg_Temp, y = Total, xlim=(1000), fill = "Political Freedom"))  + xlab("Average Temperature(C))") + ylab("Total Number of Medals") +
-  geom_point() +
-  geom_smooth(method = lm, se=FALSE)
-```
-]
----
-class: inverse, center
-## Regression
-
-.pull-center[
-* Our regression function of how the average GDP of a country will affect its gold medal chances are as follows,
-* $\hat{AverageGDP_i} = 859910.7+ 353262.9	* GoldMedals_i$
-* Our R^2 value was 0.09337504
-]
-
-```{r GDP-VS-GOLD , echo = FALSE, warning = FALSE, out.width="70%", fig.align = 'center', echo=FALSE, fig.alt= "Linear regression showing correlation between gold medals and average GDP" }
-gdp_gold <- linear_reg() %>%
-  set_engine("lm") %>%
-  fit(Avg_GDP ~ Gold, data = all_olympics)
-gdp_gold %>%
-  tidy()
-glance(gdp_gold)$r.squared
-
-```
-
----
-class: inverse, center
-##World Map
-
-
+#Where our Data Comes From:
 .pull-center[
 
 ```{r world-map, echo=FALSE, fig.align='center', warning=FALSE, out.width="70%", fig.alt="World map with circles showing countries in data set"}
@@ -188,6 +134,101 @@ m  # Print the map
 ]
 
 
+
+---
+background-image: url(https://cdn.britannica.com/90/198290-050-12A37C4E/Alberto-Tomba-gold-medal-way-Mens-Giant-1992.jpg?q=60)
+
+class: center
+.pull-center[
+
+#Analysis: Medals per Country
+
+]
+
+
+---
+class: inverse, center
+##Gold Medals Per Country 
+
+.pull-center[
+```{r medals_p, echo = FALSE, warning = FALSE, out.width="70%", fig.align = 'center', echo=FALSE, fig.alt= "Stacked bar plot showing total number of metals per country divided into gold, silver and bronze"}
+
+all_olympics_long <- all_olympics %>%
+  pivot_longer(
+    cols = c("Gold", "Silver", "Bronze"),
+    names_to = "Medal",
+    values_to = "Num_Medals"
+  )
+
+
+all_olympics_long %>%
+  ggplot(aes(x= NOC , y= Num_Medals , fill = Medal)) +
+  geom_bar(position = "stack", stat="identity", width= 0.5 ) +
+  theme_minimal() +
+  coord_flip()
+```
+]
+---
+background-image: url(https://upload.wikimedia.org/wikipedia/commons/6/64/USA_I_in_heat_1_of_2_man_bobsleigh_at_2010_Winter_Olympics_2010-02-20.jpg)
+
+class: center
+.pull-center[
+
+#Analysis: Temperature vs Medal Count
+
+]
+
+---
+class: inverse, center
+## Average Temperature vs Total Medals
+.pull-center[
+```{r gdp-vs-gold-medals, echo=FALSE, fig.align='center', warning=FALSE, out.width="70%", fig.alt= "Scatterplot showing average temperature vs total number of medals"}
+ggplot(all_olympics, aes(x = Avg_Temp, y = Total, xlim=(1000), fill = "blue"))  + xlab("Average Temperature(C))") + ylab("Total Number of Medals") +
+  geom_point() +
+  geom_smooth(method = lm, se=FALSE)
+```
+]
+---
+background-image: url(https://img.olympicchannel.com/images/image/private/t_16-9_1240-700_15x/f_auto/v1538355600/primary/tawjra46vluaxhirp3om)
+
+class: center
+.pull-center[
+
+#Regression: Looking at the Numbers
+
+]
+
+
+
+---
+class: inverse, center
+## Regression
+
+.pull-center[
+* Our regression function of how the average GDP of a country will affect its gold medal chances are as follows,
+* $\hat{AverageGDP_i} = 859910.7+ 353262.9	* GoldMedals_i$
+* Our R^2 value was 0.09337504
+]
+
+```{r GDP-VS-GOLD , echo = FALSE, warning = FALSE, out.width="70%", fig.align = 'center', echo=FALSE, fig.alt= "Linear regression showing correlation between gold medals and average GDP" }
+gdp_gold <- linear_reg() %>%
+  set_engine("lm") %>%
+  fit(Avg_GDP ~ Gold, data = all_olympics)
+gdp_gold %>%
+  tidy()
+glance(gdp_gold)$r.squared
+
+```
+
+---
+background-image: url(https://images.unsplash.com/photo-1565992441121-4367c2967103?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8c2tpfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=600&q=60)
+
+class: center
+.pull-center[
+
+#Percentage of Athletes in a Country
+
+]
 ---
 class: inverse, center
 ## Population vs Athletes
@@ -196,6 +237,13 @@ ggplot(all_olympics, aes(x = Population, y = Num_Athletes, xlim=(1000), color="r
   geom_point(shape = 16, size = 5) +
   theme_minimal()
 ```
+---
+background-image: url(https://olympics.nbcsports.com/wp-content/uploads/sites/10/2022/02/GettyImages-1371324086.jpg
+class: center
+.pull-center[
+
+#Medal Counts
+]
 ---
 class: inverse, center
 ###Further analysis, showing medal counts
@@ -206,6 +254,14 @@ ggplot(all_olympics, aes(x = Num_Athletes, y = NOC, color = Total)) +
   theme_minimal()
 
 ```
+
+---
+background-image: url(https://i.guim.co.uk/img/media/cf1422c8bb2370cb5a476ca1a3e36239c45b0e7b/0_103_5042_3026/master/5042.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=1a4fd633120584d2d3fb5887b12806ff)
+class: center
+.pull-center[
+
+#Temperature vs Medal Count
+]
 
 ---
 class: inverse, center
@@ -248,6 +304,31 @@ What we Achieved
 * Heat map shows possibility of temperature and medals correlation
 * More variables need to be included
 ]
+
+
+---
+class: inverse, center
+.pull-center[
+#Future Research 
+* Add more countries from different regions
+* Group sports into bigger categories
+* Observe temperatures from a wider range of years
+* Look into economic downturns vs Olympic years
+* Compare Summer vs Winter impacts of temperature
+
+]
+
+.pull-center[
+```{r mountain-italy, echo = FALSE, out.height = 400, out.width = 600, fig.align = 'right', fig.alt = "Snowy mountain in Italy"}
+knitr::include_graphics("img/italy.jpg")
+```
+.footnote[
+####Mountain in Cortina d'Ampezzo
+]
+
+
+]
+---
 
 ```{r dataset-image4, echo = FALSE, out.height = 200, out.width = 300, fig.align = 'right', fig.alt = "Three medals, one gold, one silver, one bronze"}
 knitr::include_graphics("img/question.jpg")

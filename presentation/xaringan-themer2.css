@@ -266,6 +266,9 @@ table.dataTable.hover tbody tr:hover, table.dataTable.display tbody tr:hover {
     top: 0 !important;
     left: 0 !important;
   }
+.my-one-page-font {
+  font-size: 40px;
+}
 }
 
 
