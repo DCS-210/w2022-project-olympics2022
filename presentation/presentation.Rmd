@@ -183,9 +183,10 @@ class: inverse, center
 ## Average Temperature vs Total Medals
 .pull-center[
 ```{r gdp-vs-gold-medals, echo=FALSE, fig.align='center', warning=FALSE, out.width="70%", fig.alt= "Scatterplot showing average temperature vs total number of medals"}
-ggplot(all_olympics, aes(x = Avg_Temp, y = Total, xlim=(1000), fill = "blue"))  + xlab("Average Temperature(C))") + ylab("Total Number of Medals") +
+ggplot(all_olympics, aes(x = Avg_Temp, y = Total, xlim=(1000), color = NOC))  + xlab("Average Temperature(C))") + ylab("Total Number of Medals") +
   geom_point() +
-  geom_smooth(method = lm, se=FALSE)
+  geom_smooth(method = lm)
+
 ```
 ]
 ---
