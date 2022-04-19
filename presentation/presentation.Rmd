@@ -174,27 +174,6 @@ all_olympics_long %>%
 ```
 ]
 ---
-background-image: url(https://upload.wikimedia.org/wikipedia/commons/6/64/USA_I_in_heat_1_of_2_man_bobsleigh_at_2010_Winter_Olympics_2010-02-20.jpg)
-
-class: center
-.pull-center[
-
-#Analysis: Temperature vs Medal Count
-
-]
-
----
-class: inverse, center
-## Average Temperature vs Total Medals
-.pull-center[
-```{r gdp-vs-gold-medals, echo=FALSE, fig.align='center', warning=FALSE, out.width="70%", fig.alt= "Scatterplot showing average temperature vs total number of medals"}
-ggplot(all_olympics, aes(x = Avg_Temp, y = Total, xlim=(1000), color = NOC))  + xlab("Average Temperature(C))") + ylab("Total Number of Medals") +
-  geom_point() +
-  geom_smooth(method = lm)
-
-```
-]
----
 background-image: url(https://img.olympicchannel.com/images/image/private/t_16-9_1240-700_15x/f_auto/v1538355600/primary/tawjra46vluaxhirp3om)
 
 class: center
