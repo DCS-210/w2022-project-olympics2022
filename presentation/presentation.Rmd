@@ -33,6 +33,8 @@ library(ggplot2)
 library(hrbrthemes)
 library(leaflet)
 #install.packages("leaflet")
+#install.packages("viridis")
+library(viridis)
 
 ```
 
@@ -148,7 +150,7 @@ class: center
 
 ---
 class: inverse, center
-##Gold Medals Per Country 
+##Medals Per Country 
 
 .pull-center[
 ```{r medals_p, echo = FALSE, warning = FALSE, out.width="70%", fig.align = 'center', echo=FALSE, fig.alt= "Stacked bar plot showing total number of metals per country divided into gold, silver and bronze"}
@@ -162,10 +164,13 @@ all_olympics_long <- all_olympics %>%
 
 
 all_olympics_long %>%
-  ggplot(aes(x= NOC , y= Num_Medals , fill = Medal)) +
+  ggplot(aes(x= fct_reorder(NOC, Total) , y= Num_Medals, fill= factor(Medal, levels= c("Gold", "Silver", "Bronze")))) +
   geom_bar(position = "stack", stat="identity", width= 0.5 ) +
+  labs(fill="Medal types",x ="Country", y = "Number of Olympic Medals")+
   theme_minimal() +
-  coord_flip()
+  coord_flip() + 
+  scale_color_viridis_b()
+
 ```
 ]
 ---
