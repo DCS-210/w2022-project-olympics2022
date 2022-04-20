@@ -82,6 +82,7 @@ class: inverse, center
 * Used WorldBank to get most accurate and recent GDP information
 * Summarized climate data by averaging temperature from past 4 years
 * Population was from most recent census data(2020)
+* We selected the 23 countries with the highest medal count for our analysis
 
 ]
 
@@ -99,6 +100,7 @@ class: inverse, center
 #Where our Data Comes From:
 .pull-center[
 
+
 ```{r world-map, echo=FALSE, fig.align='center', warning=FALSE, out.width="70%", fig.alt="World map with circles showing countries in data set"}
 m <- leaflet() %>%
   addTiles() %>% 
@@ -109,21 +111,21 @@ m <- leaflet() %>%
   addCircleMarkers(lng = 8.47, lat = 60.47, color = 'pink') %>%
   addCircleMarkers(lng = 12.57, lat = 41.87, color = 'black') %>%
   addCircleMarkers(lng = 105.32, lat = 61.52, color = 'orange') %>%
-  addCircleMarkers(lng = 14.55, lat = 47.52, color = 'white') %>%
-  addCircleMarkers(lng = 14.99, lat = 46.15, color = 'green' )%>%
-  addCircleMarkers(lng = 2.2138 , lat =46.23 , color = 'purple4' )%>%
-  addCircleMarkers(lng = 106.35, lat = 56.14, color = 'plum1' ) %>%
-  addCircleMarkers(lng = 138.26, lat = 36.20 , color = 'wheat' ) %>%
-  addCircleMarkers(lng = 8.2275, lat = 46.82, color = 'steelblue1' )%>%
-  addCircleMarkers(lng = 133.87, lat = 25.27, color = 'gold' )%>%
-  addCircleMarkers(lng = 15.47, lat = 49.82, color = 'peachpuff1')%>%
-  addCircleMarkers(lng = 	174.89, lat = 40.90, color = 'mistyrose2')%>%
-  addCircleMarkers(lng = 	95.71, lat = 37.09, color = 'salmon2' )%>%
-  addCircleMarkers(lng = 	27.95, lat = 53.71, color = 'forestgreen' )%>%
-  addCircleMarkers(lng = 	19.50, lat = 47.16, color = 'maroon2' )%>%
-  addCircleMarkers(lng = 	25.75, lat = 61.92, color = 'maroon' )%>%
-  addCircleMarkers(lng = 	127.77, lat = 35.91, color = 'palegreen' )%>%
-  addCircleMarkers(lng = 	19.15, lat = 51.92, color = 'turquoise2' )
+  addCircleMarkers(lng = 14.55, lat = 47.52, color = 'darkgreen') %>%
+  addCircleMarkers(lng = 14.99, lat = 46.15, color = 'darkred' )%>%
+  addCircleMarkers(lng = 2.2138 , lat =46.23 , color = 'green' )%>%
+  addCircleMarkers(lng = 106, lat = 56, color = 'pink' ) %>%
+  addCircleMarkers(lng = 138.26, lat = 36.20 , color = 'yellow' ) %>%
+  addCircleMarkers(lng = 8.2275, lat = 46.82, color = 'blue' )%>%
+  addCircleMarkers(lng = 133.87, lat = 25.27, color = 'red' )%>%
+  addCircleMarkers(lng = 15.47, lat = 49.82, color = 'purple')%>%
+  addCircleMarkers(lng = 	174.89, lat = 40.90, color = 'green')%>%
+  addCircleMarkers(lng = 	95.71, lat = 37.09, color = 'yellow' )%>%
+  addCircleMarkers(lng = 	27.95, lat = 53.71, color = 'darkgreen' )%>%
+  addCircleMarkers(lng = 	19.50, lat = 47.16, color = 'blue' )%>%
+  addCircleMarkers(lng = 	61, lat = 25, color = 'green' )%>%
+  addCircleMarkers(lng = 	127.77, lat = 35.91, color = 'yellow' )%>%
+  addCircleMarkers(lng = 	19.15, lat = 51.92, color = 'orange' )
 m  # Print the map
 
 ```
@@ -134,8 +136,6 @@ m  # Print the map
 * Causes a bias in our analysis
 
 ]
-
-
 
 ---
 background-image: url(https://cdn.britannica.com/90/198290-050-12A37C4E/Alberto-Tomba-gold-medal-way-Mens-Giant-1992.jpg?q=60)
@@ -218,8 +218,9 @@ class: center
 class: inverse, center
 ## Population vs Athletes
 ```{r athletesVSpopulation, echo=FALSE}
-ggplot(all_olympics, aes(x = Population, y = Num_Athletes, color = NOC, xlim=(1000)))  + xlab("Population") + ylab("Number of Athletes") +
+ggplot(all_olympics, aes(x = (Num_Athletes/Population), y = Total, color = NOC, xlim=(1)))  + xlab("Winter Athletes per capita") + ylab("Total Medals") +
   geom_point(shape = 16, size = 5) +
+  annotate('text', x = 3, y = 13.5, label = 'C')
   theme_minimal()
 ```
 ---
