@@ -17,8 +17,8 @@ output:
 ---
 
 ```{r include=FALSE}
-#library(readr)
-#all_olympics <- read_csv("/cloud/project/data/all_olympics.csv")
+library(readr)
+all_olympics <- read_csv("/cloud/project/data/all_olympics.csv")
 #View(all_olympics)
 ```
 
@@ -35,9 +35,16 @@ library(leaflet)
 #install.packages("leaflet")
 #install.packages("viridis")
 library(viridis)
+library(sf)
 
 ```
 
+```{r countries-read, include = FALSE}
+library(readr)
+countriesLL <- read_csv("/cloud/project/data/countriesLL.csv")
+#View(countriesLL)
+
+```
 
 ```{r setup, include=FALSE}
 # For better figure resolution
@@ -119,7 +126,7 @@ m <- leaflet() %>%
   addCircleMarkers(lng = 8.2275, lat = 46.82, color = 'blue' )%>%
   addCircleMarkers(lng = 133.87, lat = 25.27, color = 'red' )%>%
   addCircleMarkers(lng = 15.47, lat = 49.82, color = 'purple')%>%
-  addCircleMarkers(lng = 	174.89, lat = 40.90, color = 'green')%>%
+  addCircleMarkers(lng = 	174, lat = -40, color = 'green')%>%
   addCircleMarkers(lng = 	95.71, lat = 37.09, color = 'yellow' )%>%
   addCircleMarkers(lng = 	27.95, lat = 53.71, color = 'darkgreen' )%>%
   addCircleMarkers(lng = 	19.50, lat = 47.16, color = 'blue' )%>%
@@ -136,6 +143,22 @@ m  # Print the map
 * Causes a bias in our analysis
 
 ]
+---
+
+```{r world-map-extra, echo = FALSE}
+pal <- colorNumeric(palette = "RdYlGn", domain = countriesLL$Total)
+labels <- sprintf("<strong>%s</strong><br/>%s", countriesLL$country, 
+                  countriesLL$Total)%>%
+  lapply(htmltools::HTML)
+
+w <- leaflet(data= countriesLL) %>%
+  addTiles() %>%
+  addCircleMarkers(lng = countriesLL$longitude, lat = countriesLL$latitude,color = 'red') %>%
+  addPolygons(fillColor= ~pal(countriesLL$Total), lng = countriesLL$longitude, lat = countriesLL$latitude, 
+            label=labels) %>%
+  addLegend("bottomleft", pal = pal, values = ~countriesLL$Total, title = "Medals per country")
+w
+```
 
 ---
 background-image: url(https://cdn.britannica.com/90/198290-050-12A37C4E/Alberto-Tomba-gold-medal-way-Mens-Giant-1992.jpg?q=60)
@@ -165,8 +188,8 @@ all_olympics_long <- all_olympics %>%
 
 all_olympics_long %>%
   ggplot(aes(x= fct_reorder(NOC, Total) , y= Num_Medals, fill= factor(Medal, levels= c("Gold", "Silver", "Bronze")))) +
-  geom_bar(position = "stack", stat="identity", width= 0.5 ) +
-  labs(fill="Medal types",x ="Country", y = "Number of Olympic Medals")+
+  geom_bar(position = "stack", stat="identity", width= 0.5, na.rm = TRUE) +
+  labs(fill="Medal types", x ="Country", y = "Number of Olympic Medals")+
   theme_minimal() +
   coord_flip() + 
   scale_color_viridis_b()
@@ -191,14 +214,14 @@ class: inverse, center
 
 .pull-center[
 * Our regression function of how the average GDP of a country will affect its gold medal chances are as follows,
-* $\hat{AverageGDP_i} = 859910.7+ 353262.9	* GoldMedals_i$
-* Our R^2 value was 0.09337504
+* $\hat{Gold_i} = 7.8 + 0.0000000537	* {AvgGDP_i} + 0.0112 * NumAthletes - 0.0112 * AvgTemp$ 
+* Our R^2 value was 1 !
 ]
 
 ```{r GDP-VS-GOLD , echo = FALSE, warning = FALSE, out.width="70%", fig.align = 'center', echo=FALSE, fig.alt= "Linear regression showing correlation between gold medals and average GDP" }
 gdp_gold <- linear_reg() %>%
   set_engine("lm") %>%
-  fit(Avg_GDP ~ Gold, data = all_olympics)
+  fit(Gold~ Avg_GDP + Num_Athletes + Avg_Temp + NOC + Population, data = all_olympics)
 gdp_gold %>%
   tidy()
 glance(gdp_gold)$r.squared
@@ -211,38 +234,20 @@ background-image: url(https://images.unsplash.com/photo-1565992441121-4367c29671
 class: center
 .pull-center[
 
-#Percentage of Athletes in a Country
+#Athlete per capita vs Total Medals
 
 ]
 ---
 class: inverse, center
 ## Population vs Athletes
 ```{r athletesVSpopulation, echo=FALSE}
-ggplot(all_olympics, aes(x = (Num_Athletes/Population), y = Total, color = NOC, xlim=(1)))  + xlab("Winter Athletes per capita") + ylab("Total Medals") +
+ggplot(all_olympics, aes(x = (Num_Athletes/Population), y = Total, color = NOC))  + xlab("Winter Athletes per capita") + ylab("Total Medals") +
   geom_point(shape = 16, size = 5) +
-  annotate('text', x = 3, y = 13.5, label = 'C')
   theme_minimal()
 ```
 ---
+
 background-image: url(https://olympics.nbcsports.com/wp-content/uploads/sites/10/2022/02/GettyImages-1371324086.jpg
-class: center
-.pull-center[
-
-#Medal Counts
-]
----
-class: inverse, center
-###Further analysis, showing medal counts
-```{r sam2nd, echo=FALSE}
-ggplot(all_olympics, aes(x = Num_Athletes, y = NOC, color = Total)) +
-  xlab("Number of Athletes") + ylab("Country") +
-  geom_point()
-  theme_minimal()
-
-```
-
----
-background-image: url(https://i.guim.co.uk/img/media/cf1422c8bb2370cb5a476ca1a3e36239c45b0e7b/0_103_5042_3026/master/5042.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=1a4fd633120584d2d3fb5887b12806ff)
 class: center
 .pull-center[
 
@@ -267,6 +272,7 @@ ggplot(all_olympics, aes(fct_reorder(NOC, Total), fct_reorder(temp_cat, Avg_Temp
   theme(axis.text.x = element_text(angle = 60, hjust = 1, vjust = 1))
   
 ```
+
 ```{r image-2, echo=FALSE}
 style_xaringan(
   title_slide_background_image = "img/olympics1.jpg"
@@ -286,9 +292,9 @@ class: inverse, center
 
 What we Achieved 
 .pull-center[
-* Low R^2 value between gold medals and average GDP
+* R^2 is estimated to be 1, which would estimate perfect estimation of the variability around the dependent variable. 
 * Heat map shows possibility of temperature and medals correlation
-* More variables need to be included
+* Seems unlikely that we would have perfect R^2, more regressions needed
 ]
 
 ```{r dataset-image4, echo = FALSE, out.height = 200, out.width = 300, fig.align = 'right', fig.alt = "Red question mark and white man"}
