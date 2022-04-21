@@ -89,7 +89,7 @@ class: inverse, center
 * Used WorldBank to get most accurate and recent GDP information
 * Summarized climate data by averaging temperature from past 4 years
 * Population was from most recent census data(2020)
-* We selected the 23 countries with the highest medal count for our analysis
+* We selected the 22 countries with the highest medal count for our analysis
 
 ]
 
