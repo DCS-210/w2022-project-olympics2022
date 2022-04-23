@@ -136,12 +136,16 @@ w
 ]
 ---
 class: center
+=======
+{r world map, echo=FALSE, fig.align='center', warning=FALSE, out.width="70%", fig.alt="World map with circles showing countries in data set"}
+
 background-image: url(https://cdn.britannica.com/90/198290-050-12A37C4E/Alberto-Tomba-gold-medal-way-Mens-Giant-1992.jpg?q=60)
 
 <span role="img3" aria-label="Slide background shows: Man alpine skiing at the Winter Olympics."></span>
 
 
 .pull-center[
+
 
 #Analysis: Medals per Country
 
@@ -175,7 +179,11 @@ all_olympics_long %>%
 ```
 ]
 ---
+
 class: center
+
+=======
+{r figure skater, echo = FALSE, warning = FALSE, out.width="70%", fig.align = 'center', echo=FALSE, fig.alt= "Slide background shows: Olympic Figure Skater"}
 
 background-image: url(https://img.olympicchannel.com/images/image/private/t_16-9_1240-700_15x/f_auto/v1538355600/primary/tawjra46vluaxhirp3om)
 <span role="img4" aria-label="Slide background shows: Woman figure skating in a purple costume."></span>
@@ -210,7 +218,11 @@ glance(gdp_gold)$r.squared
 ```
 
 ---
+
 class: center
+
+{r skier, echo = FALSE, warning = FALSE, out.width="70%", fig.align = 'center', echo=FALSE, fig.alt= "Slide background shows: Recreational Alpine Skier"}
+
 background-image: url(https://images.unsplash.com/photo-1565992441121-4367c2967103?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8c2tpfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=600&q=60)
 <span role="img3" aria-label="Slide background shows: Man freestyle skiing in mid-jump."></span>
 
@@ -230,9 +242,35 @@ ggplot(all_olympics, aes(x = (Num_Athletes/Population), y = Total, label = NOC))
   theme_minimal()
 ```
 ---
+
 class: center
 background-image: url(https://olympics.nbcsports.com/wp-content/uploads/sites/10/2022/02/GettyImages-1371324086.jpg
 <span role="img5" aria-label="Slide background shows: Woman curling at the Winter Olympics"></span>
+
+
+
+{r curling, echo = FALSE, warning = FALSE, out.width="70%", fig.align = 'center', echo=FALSE, fig.alt= "Slide background shows: Olympic Curling Image"}
+background-image: url(https://olympics.nbcsports.com/wp-content/uploads/sites/10/2022/02/GettyImages-1371324086.jpg
+class: center
+.pull-center[
+
+#Medal Counts
+]
+---
+class: inverse, center
+###Further analysis, showing medal counts
+```{r sam2nd, echo=FALSE}
+ggplot(all_olympics, aes(x = Num_Athletes, y = NOC, color = Total)) +
+  xlab("Number of Athletes") + ylab("Country") +
+  geom_point()
+  theme_minimal()
+
+```
+
+---
+{r hockey, echo = FALSE, warning = FALSE, out.width="70%", fig.align = 'center', echo=FALSE, fig.alt= "Slide background shows: Olympic Hockey Game Scoring Goal"}
+background-image: url(https://i.guim.co.uk/img/media/cf1422c8bb2370cb5a476ca1a3e36239c45b0e7b/0_103_5042_3026/master/5042.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=1a4fd633120584d2d3fb5887b12806ff)
+
 
 .pull-center[
 
