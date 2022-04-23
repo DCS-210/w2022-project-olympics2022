@@ -36,6 +36,8 @@ library(leaflet)
 #install.packages("viridis")
 library(viridis)
 library(sf)
+library(ggrepel)
+
 
 ```
 
@@ -48,7 +50,7 @@ countriesLL <- read_csv("/cloud/project/data/countriesLL.csv")
 
 ```{r setup, include=FALSE}
 # For better figure resolution
-knitr::opts_chunk$set(fig.retina = 3, dpi = 300, fig.width = 6, fig.asp = 0.618, out.width = "80%")
+knitr::opts_chunk$set(fig.retina = 3, dpi = 300, fig.width = 6, fig.asp = 0.618, out.width = "80%", warning = FALSE, message = FALSE)
 ```
 
 
@@ -107,35 +109,24 @@ class: inverse, center
 #Where our Data Comes From:
 .pull-center[
 
+```{r world-map-extra, echo = FALSE}
+pal <- colorNumeric(palette = "YlOrRd", domain = countriesLL$Total)
+labels <- sprintf("<strong>%s</strong><br/>%s", countriesLL$country, 
+                  countriesLL$Total)%>%
+  lapply(htmltools::HTML)
 
-```{r world-map, echo=FALSE, fig.align='center', warning=FALSE, out.width="70%", fig.alt="World map with circles showing countries in data set"}
-m <- leaflet() %>%
-  addTiles() %>% 
-  addCircleMarkers(lng = 19, lat = 60, color = 'red') %>% 
-  addCircleMarkers(lng = 5.29, lat = 52, color = 'blue')%>%
-  addCircleMarkers(lng = 104.19, lat = 35.86, color = 'purple')%>%
-  addCircleMarkers(lng = 10.45, lat = 51.16, color = 'yellow') %>%
-  addCircleMarkers(lng = 8.47, lat = 60.47, color = 'pink') %>%
-  addCircleMarkers(lng = 12.57, lat = 41.87, color = 'black') %>%
-  addCircleMarkers(lng = 105.32, lat = 61.52, color = 'orange') %>%
-  addCircleMarkers(lng = 14.55, lat = 47.52, color = 'darkgreen') %>%
-  addCircleMarkers(lng = 14.99, lat = 46.15, color = 'darkred' )%>%
-  addCircleMarkers(lng = 2.2138 , lat =46.23 , color = 'green' )%>%
-  addCircleMarkers(lng = 106, lat = 56, color = 'pink' ) %>%
-  addCircleMarkers(lng = 138.26, lat = 36.20 , color = 'yellow' ) %>%
-  addCircleMarkers(lng = 8.2275, lat = 46.82, color = 'blue' )%>%
-  addCircleMarkers(lng = 133.87, lat = 25.27, color = 'red' )%>%
-  addCircleMarkers(lng = 15.47, lat = 49.82, color = 'purple')%>%
-  addCircleMarkers(lng = 	174, lat = -40, color = 'green')%>%
-  addCircleMarkers(lng = 	95.71, lat = 37.09, color = 'yellow' )%>%
-  addCircleMarkers(lng = 	27.95, lat = 53.71, color = 'darkgreen' )%>%
-  addCircleMarkers(lng = 	19.50, lat = 47.16, color = 'blue' )%>%
-  addCircleMarkers(lng = 	61, lat = 25, color = 'green' )%>%
-  addCircleMarkers(lng = 	127.77, lat = 35.91, color = 'yellow' )%>%
-  addCircleMarkers(lng = 	19.15, lat = 51.92, color = 'orange' )
-m  # Print the map
-
+w <- leaflet(data= countriesLL) %>%
+  addProviderTiles(providers$Stamen.Terrain) %>%
+  addCircleMarkers(lng = countriesLL$longitude, lat = countriesLL$latitude, fillColor= ~pal(countriesLL$Total), color = ~pal(countriesLL$Total), label = labels, fillOpacity = 1) %>%
+  #addPolygons(fillColor= ~pal(countriesLL$Total), lng = countriesLL$longitude, lat = countriesLL$latitude, 
+            #label=labels) %>%
+  addLegend("topleft", pal = pal, values = ~countriesLL$Total, title = "Medals per country")
+w
 ```
+
+
+
+
 ]
 
 .pull-left[
@@ -144,28 +135,12 @@ m  # Print the map
 
 ]
 ---
-
-```{r world-map-extra, echo = FALSE}
-pal <- colorNumeric(palette = "RdYlGn", domain = countriesLL$Total)
-labels <- sprintf("<strong>%s</strong><br/>%s", countriesLL$country, 
-                  countriesLL$Total)%>%
-  lapply(htmltools::HTML)
-
-w <- leaflet(data= countriesLL) %>%
-  addTiles() %>%
-  addCircleMarkers(lng = countriesLL$longitude, lat = countriesLL$latitude,color = 'red') %>%
-  addPolygons(fillColor= ~pal(countriesLL$Total), lng = countriesLL$longitude, lat = countriesLL$latitude, 
-            label=labels) %>%
-  addLegend("bottomleft", pal = pal, values = ~countriesLL$Total, title = "Medals per country")
-w
-```
-
----
+class: center
 background-image: url(https://cdn.britannica.com/90/198290-050-12A37C4E/Alberto-Tomba-gold-medal-way-Mens-Giant-1992.jpg?q=60)
 
 <span role="img3" aria-label="Slide background shows: Man alpine skiing at the Winter Olympics."></span>
 
-class: center
+
 .pull-center[
 
 #Analysis: Medals per Country
@@ -189,6 +164,7 @@ all_olympics_long <- all_olympics %>%
 
 
 all_olympics_long %>%
+  filter(is.na(NOC) == FALSE) %>%
   ggplot(aes(x= fct_reorder(NOC, Total) , y= Num_Medals, fill= factor(Medal, levels= c("Gold", "Silver", "Bronze")))) +
   geom_bar(position = "stack", stat="identity", width= 0.5, na.rm = TRUE) +
   labs(fill="Medal types", x ="Country", y = "Number of Olympic Medals")+
@@ -199,10 +175,12 @@ all_olympics_long %>%
 ```
 ]
 ---
+class: center
+
 background-image: url(https://img.olympicchannel.com/images/image/private/t_16-9_1240-700_15x/f_auto/v1538355600/primary/tawjra46vluaxhirp3om)
 <span role="img4" aria-label="Slide background shows: Woman figure skating in a purple costume."></span>
 
-class: center
+
 .pull-center[
 
 #Regression: Looking at the Numbers
@@ -217,14 +195,14 @@ class: inverse, center
 
 .pull-center[
 * Our regression function of how the average GDP of a country will affect its gold medal chances are as follows,
-* $\hat{Gold_i} = 7.8 + 0.0000000537	* {AvgGDP_i} + 0.0112 * NumAthletes - 0.0112 * AvgTemp$ 
-* Our R^2 value was 1 !
+* $\hat{Total_i} =  9.04 + 2207374* {AvgGDP_i} + 9496.5 * NumAthletes - 49.15 * AvgTemp - 649927000 * Population$ 
+* Our R^2 value was 0.5863096!
 ]
 
 ```{r GDP-VS-GOLD , echo = FALSE, warning = FALSE, out.width="70%", fig.align = 'center', echo=FALSE, fig.alt= "Linear regression showing correlation between gold medals and many variables" }
 gdp_gold <- linear_reg() %>%
   set_engine("lm") %>%
-  fit(Gold~ Avg_GDP + Num_Athletes + Avg_Temp + NOC + Population, data = all_olympics)
+  fit(Total~ Avg_GDP + Num_Athletes + Avg_Temp + Population, data = all_olympics)
 gdp_gold %>%
   tidy()
 glance(gdp_gold)$r.squared
@@ -232,10 +210,11 @@ glance(gdp_gold)$r.squared
 ```
 
 ---
+class: center
 background-image: url(https://images.unsplash.com/photo-1565992441121-4367c2967103?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8c2tpfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=600&q=60)
 <span role="img3" aria-label="Slide background shows: Man freestyle skiing in mid-jump."></span>
 
-class: center
+
 .pull-center[
 
 #Athlete per capita vs Total Medals
@@ -245,15 +224,16 @@ class: center
 class: inverse, center
 ## Population vs Athletes
 ```{r athletesVSpopulation, echo=FALSE}
-ggplot(all_olympics, aes(x = (Num_Athletes/Population), y = Total, color = NOC))  + xlab("Winter Athletes per capita") + ylab("Total Medals") +
-  geom_point(shape = 16, size = 5) +
+ggplot(all_olympics, aes(x = (Num_Athletes/Population), y = Total, label = NOC))  + xlab("Winter Athletes per capita") + ylab("Total Medals") +
+  geom_point() +
+  geom_text_repel() +
   theme_minimal()
 ```
 ---
-
+class: center
 background-image: url(https://olympics.nbcsports.com/wp-content/uploads/sites/10/2022/02/GettyImages-1371324086.jpg
 <span role="img5" aria-label="Slide background shows: Woman curling at the Winter Olympics"></span>
-class: center
+
 .pull-center[
 
 #Temperature vs Medal Count
